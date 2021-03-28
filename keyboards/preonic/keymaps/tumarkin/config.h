@@ -52,3 +52,13 @@
 
 // Apply the modifier on keys that are tapped during a short hold of a modtap
 #define PERMISSIVE_HOLD
+
+// Mouse key configuration
+#define MK_KINETIC_SPEED
+#define MOUSEKEY_INTERVAL 15
+// #define MOUSEKEY_MAX_SPEED 3
+#define MOUSEKEY_MOVE_DELTA 1
+#define MOUSEKEY_BASE_SPEED 1000
+#define MOUSEKEY_INITIAL_SPEED 1
+
+// #define MOUSEKEY_TIME_TO_MAX 50
