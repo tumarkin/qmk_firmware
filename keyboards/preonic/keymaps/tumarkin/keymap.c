@@ -97,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT_preonic_grid(
   KC_GRV,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,       KC_BSPC,
   KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,       KC_QUOT, 
-  CTR_ESC,  QHOME_A, QHOME_S, QHOME_D, QHOME_F, KC_G,   KC_H,   QHOME_J, QHOME_K, QHOME_L, QHOME_SCLN, KC_ENT,
+  KC_ESC,   QHOME_A, QHOME_S, QHOME_D, QHOME_F, KC_G,   KC_H,   QHOME_J, QHOME_K, QHOME_L, QHOME_SCLN, KC_ENT,
   KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH,    KC_RSFT,
   FUNC_MO,  MOUS_MO, TENK_MO, PROG_TG, LOWER,   KC_SPC, KC_SPC, RAISE,   KC_LEFT, KC_DOWN, KC_UP,      KC_RGHT
 ),
@@ -142,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_DVORAK] = LAYOUT_preonic_grid(
   KC_GRV,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
   KC_TAB,   KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,   KC_F,   KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
-  CTR_ESC,  DHOME_A, DHOME_O, DHOME_E, DHOME_U, KC_I,   KC_D,   DHOME_H, DHOME_T, DHOME_N, DHOME_S, KC_ENT,
+  KC_ESC,   DHOME_A, DHOME_O, DHOME_E, DHOME_U, KC_I,   KC_D,   DHOME_H, DHOME_T, DHOME_N, DHOME_S, KC_ENT,
   KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,   KC_B,   KC_M,    KC_W,    KC_V,    KC_Z,    KC_RSFT,
   FUNC_MO,  MOUS_MO, TENK_MO, PROG_TG, LOWER,   KC_SPC, KC_SPC, RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
@@ -269,17 +269,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |      |      |      |      |      | Left | Down | Right| Btn1 |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |Speed0|Speed1|Speed2|      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_MOUSE] = LAYOUT_preonic_grid(
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-  _______, _______, _______, _______, _______, _______, _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN2, _______, 
-  _______, _______, _______, _______, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, _______, 
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ 
+  _______, _______, _______,      _______,      _______,      _______, _______, _______, _______, _______, _______, _______, 
+  _______, _______, _______,      _______,      _______,      _______, _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN2, _______, 
+  _______, _______, _______,      _______,      _______,      _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, _______, 
+  _______, _______, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2, _______, _______, _______, _______, _______, _______, _______, 
+  _______, _______, _______,      _______,      _______,      _______, _______, _______, _______, _______, _______, _______ 
 ),
 
 /* Functions
