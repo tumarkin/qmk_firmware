@@ -1,13 +1,16 @@
 #pragma once
 
+                                
+
 #ifdef AUDIO_ENABLE
-    #define STARTUP_SONG SONG(PREONIC_SOUND)
+    #define STARTUP_SONG SONG(ZELDA_PUZZLE)
+    // #define STARTUP_SONG SONG(PREONIC_SOUND)
     // #define STARTUP_SONG SONG(NO_SOUND)
 
-    #define DEFAULT_LAYER_SONGS { SONG(QWERTY_SOUND), \
-                                  SONG(COLEMAK_SOUND), \
-                                  SONG(DVORAK_SOUND) \
-                                }
+    // #define DEFAULT_LAYER_SONGS { SONG(QWERTY_SOUND), 
+    //                               SONG(COLEMAK_SOUND), 
+    //                               SONG(DVORAK_SOUND) 
+    //                             }
 #endif
 
 #define MUSIC_MASK (keycode != KC_NO)
@@ -33,15 +36,9 @@
 /* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
 //#define MIDI_TONE_KEYCODE_OCTAVES 2
 
-
 // Mod-tap settings
 // From: https://precondition.github.io/home-row-mods
 // Configure the global tapping term (default: 200ms)
-// 
-// Defining the TAPPING_TERM here seems to conflict with
-// that in tmk_core/common/action_tapping.h
-// 
-// Defining it at both locaitons.
 #define TAPPING_TERM 200
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
@@ -59,7 +56,7 @@
 
 #define MOUSEKEY_INTERVAL 15
 #define MOUSEKEY_MOVE_DELTA 1
-#define MOUSEKEY_MAX_SPEED 33
+#define MOUSEKEY_MAX_SPEED 20
 // #define MK_C_INTERVAL_0 15
 // #define MK_C_OFFSET_0 5
 // #define MOUSEKEY_TIME_TO_MAX 50
