@@ -158,11 +158,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // KC_DEL: DEL
 [_BEAKL15] = LAYOUT_preonic_grid(
-  KC_GRV,   KC_1,    KC_2,    KC_3,    KC_4,  KC_5,    KC_6,   KC_7,  KC_8,    KC_9,    KC_0,  KC_BSPC,
-  KC_TAB,   KC_Q,    KC_H,    KC_O,    KC_U,  KC_X,    KC_G,   KC_C,  KC_R,    KC_F,    KC_Z,  KC_SCLN,    
-  KC_LCTL,  KC_Y,    KC_I,    KC_E,    KC_A,  KC_DOT,  KC_D,   KC_S,  KC_T,    KC_N,    KC_B,  KC_ENT, 
-  KC_LSFT,  KC_J,    KC_SLSH, KC_COMM, KC_K,  KC_QUOT, KC_W,   KC_M,  KC_L,    KC_P,    KC_V,  KC_RSFT,  
-  FUNC_MO,  KC_LALT, PROG_TG, TENK_MO, LOWER, KC_SPC,  KC_SPC, RAISE, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT
+  KC_GRV,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+  KC_TAB,   KC_Q,    KC_H,    KC_O,    KC_U,    KC_X,    KC_G,   KC_C,    KC_R,    KC_F,    KC_Z,    KC_SCLN,    
+  KC_LCTL,  BHOME_Y, BHOME_I, BHOME_E, BHOME_A, KC_DOT,  KC_D,   BHOME_S, BHOME_T, BHOME_N, BHOME_B, KC_ENT, 
+  KC_LSFT,  KC_J,    KC_SLSH, KC_COMM, KC_K,    KC_QUOT, KC_W,   KC_M,    KC_L,    KC_P,    KC_V,    KC_RSFT,  
+  FUNC_MO,  KC_LALT, PROG_TG, TENK_MO, LOWER,   KC_SPC,  KC_SPC, RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 

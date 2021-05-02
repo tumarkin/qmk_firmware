@@ -67,3 +67,8 @@
 // #define MOUSEKEY_INTERVAL 10
 // #define MOUSEKEY_MOVE_DELTA 5
 // #define MOUSEKEY_MAX_SPEED 10
+
+
+
+// #define COMBO_COUNT 1
+

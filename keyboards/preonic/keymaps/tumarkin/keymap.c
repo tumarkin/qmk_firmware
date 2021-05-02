@@ -61,6 +61,18 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define DHOME_N LALT_T(KC_N)
 #define DHOME_S RCTL_T(KC_S)
 
+// BEAKL HOME ROW ALIASES
+// Left-hand home row mods
+#define BHOME_Y LCTL_T(KC_Y)
+#define BHOME_I LALT_T(KC_I)
+#define BHOME_E LGUI_T(KC_E)
+#define BHOME_A LSFT_T(KC_A)
+// Right-hand home row mods
+#define BHOME_S RSFT_T(KC_S)
+#define BHOME_T RGUI_T(KC_T)
+#define BHOME_N LALT_T(KC_N)
+#define BHOME_B RCTL_T(KC_B)
+
 // Custom key shortcuts
 #define PROG_TG TG(_PROGRAMMER)
 #define TENK_MO MO(_TENKEY)
@@ -556,26 +568,34 @@ bool music_mask_user(uint16_t keycode) {
   }
 }
 
-// ////////////////////////////////////////////////////////////////////////////////
-// // Combos
-// ////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Combos
+////////////////////////////////////////////////////////////////////////////////
 // enum combo_events {
-//     DFJK_QWERTY_MODS,
-//     EUHT_DVORAK_MODS
+//     ESC_ENTER_CAPS_LOCK
+    // DFJK_QWERTY_MODS,
+    // EUHT_DVORAK_MODS
 // };
 
+// const uint16_t PROGMEM esc_enter_caps_lock[] = {KC_LSFT, KC_RSFT, COMBO_END};
 // const uint16_t PROGMEM dfjk_combo[] = {KC_D, KC_F, KC_J, KC_K, COMBO_END};
 // const uint16_t PROGMEM euht_combo[] = {KC_E, KC_U, KC_H, KC_T, COMBO_END};
 
 // combo_t key_combos[COMBO_COUNT] = {
+    // [ESC_ENTER_CAPS_LOCK] = COMBO_ACTION(esc_enter_caps_lock),
 //     [DFJK_QWERTY_MODS] = COMBO_ACTION(dfjk_combo),
 //     [EUHT_DVORAK_MODS] = COMBO_ACTION(euht_combo)
-//   };
+  // };
 
 
 
 // void process_combo_event(uint16_t combo_index, bool pressed) {
 //   switch(combo_index) {
+      // case ESC_ENTER_CAPS_LOCK:
+      //     if (pressed) {
+      //         tap_code16(KC_CAPS);
+      //     }
+      //     break;
 //     case DFJK_QWERTY_MODS:
 //       if (pressed) {
 //         layer_on(_QWERTY_MODS);
@@ -586,5 +606,6 @@ bool music_mask_user(uint16_t keycode) {
 //         layer_on(_DVORAK_MODS);
 //       }
 //       break;}
+//    }
 // }
 
