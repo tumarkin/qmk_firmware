@@ -39,40 +39,43 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 // QWERTY HOME ROW ALIASES
 // Left-hand home row mods
-#define QHOME_A LCTL_T(KC_A)
-#define QHOME_S LALT_T(KC_S)
-#define QHOME_D LGUI_T(KC_D)
-#define QHOME_F LSFT_T(KC_F)
-#define QHOME_G LT(_TENKEY, KC_G)
+#define QWRT_A LCTL_T(KC_A)
+#define QWRT_S LALT_T(KC_S)
+#define QWRT_D LGUI_T(KC_D)
+#define QWRT_F LSFT_T(KC_F)
 // Right-hand home row mods
-#define QHOME_J RSFT_T(KC_J)
-#define QHOME_K RGUI_T(KC_K)
-#define QHOME_L LALT_T(KC_L)
-#define QHOME_SCLN RCTL_T(KC_SCLN)
+#define QWRT_J RSFT_T(KC_J)
+#define QWRT_K RGUI_T(KC_K)
+#define QWRT_L LALT_T(KC_L)
+#define QWRT_SCLN RCTL_T(KC_SCLN)
+// 10 key toggles
+#define QWRT_G LT(_TENKEY, KC_G)
+#define QWRT_R LT(_TENKEY, KC_R)
+
 
 // DVORAK HOME ROW ALIASES
 // Left-hand home row mods
-#define DHOME_A LCTL_T(KC_A)
-#define DHOME_O LALT_T(KC_O)
-#define DHOME_E LGUI_T(KC_E)
-#define DHOME_U LSFT_T(KC_U)
+#define DVRK_A LCTL_T(KC_A)
+#define DVRK_O LALT_T(KC_O)
+#define DVRK_E LGUI_T(KC_E)
+#define DVRK_U LSFT_T(KC_U)
 // Right-hand home row mods
-#define DHOME_H RSFT_T(KC_H)
-#define DHOME_T RGUI_T(KC_T)
-#define DHOME_N LALT_T(KC_N)
-#define DHOME_S RCTL_T(KC_S)
+#define DVRK_H RSFT_T(KC_H)
+#define DVRK_T RGUI_T(KC_T)
+#define DVRK_N LALT_T(KC_N)
+#define DVRK_S RCTL_T(KC_S)
 
 // BEAKL HOME ROW ALIASES
 // Left-hand home row mods
-#define BHOME_Y LCTL_T(KC_Y)
-#define BHOME_I LALT_T(KC_I)
-#define BHOME_E LGUI_T(KC_E)
-#define BHOME_A LSFT_T(KC_A)
+#define BEKL_Y LCTL_T(KC_Y)
+#define BEKL_I LALT_T(KC_I)
+#define BEKL_E LGUI_T(KC_E)
+#define BEKL_A LSFT_T(KC_A)
 // Right-hand home row mods
-#define BHOME_S RSFT_T(KC_S)
-#define BHOME_T RGUI_T(KC_T)
-#define BHOME_N LALT_T(KC_N)
-#define BHOME_B RCTL_T(KC_B)
+#define BEKL_S RSFT_T(KC_S)
+#define BEKL_T RGUI_T(KC_T)
+#define BEKL_N LALT_T(KC_N)
+#define BEKL_B RCTL_T(KC_B)
 
 // Mouse key aliases
 #define MS_AC_0 KC_MS_ACCEL0
@@ -82,11 +85,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // Custom key shortcuts
 #define PROG_TG   TG(_PROGRAMMER)
 // #define TENK_MO   MO(_TENKEY)
-#define FUNC_MO   MO(_FUNCTIONS)
-#define MOUS_MO   MO(_MOUSE)
-#define ESC_CAP   TD(TD_ESC_CAPS)
-#define SPC_MV    LT(_MOVEMENT, KC_SPC)
-#define TAB_10KEY LT(_TENKEY, KC_TAB)
+#define FUNC_MO MO(_FUNCTIONS)
+#define MOUS_MO MO(_MOUSE)
+#define ESC_CAP TD(TD_ESC_CAPS)
+#define SPC_MV  LT(_MOVEMENT, KC_SPC)
+#define TAB_10  LT(_TENKEY, KC_TAB)
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -149,11 +152,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // BACKLIT: Brite
 
 [_QWERTY] = LAYOUT_preonic_grid(
-  KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,   KC_7,    KC_8,    KC_9,    KC_0,       KC_BSPC,
-  TAB_10KEY, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,       KC_QUOT, 
-  ESC_CAP,   QHOME_A, QHOME_S, QHOME_D, QHOME_F, QHOME_G, KC_H,   QHOME_J, QHOME_K, QHOME_L, QHOME_SCLN, KC_ENT,
-  KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH,    KC_RSFT,
-  FUNC_MO,   MOUS_MO, _______, _______, LOWER,   SPC_MV,  SPC_MV, RAISE,   KC_LEFT, KC_DOWN, KC_UP,      KC_RGHT
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,   KC_5,   KC_6,   KC_7,   KC_8,    KC_9,    KC_0,      KC_BSPC,
+  TAB_10,  KC_Q,    KC_W,    KC_E,    QWRT_R, KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,      KC_QUOT, 
+  ESC_CAP, QWRT_A,  QWRT_S,  QWRT_D,  QWRT_F, QWRT_G, KC_H,   QWRT_J, QWRT_K,  QWRT_L,  QWRT_SCLN, KC_ENT,
+  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
+  FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
 ),
 
 /* Colemak
@@ -170,11 +173,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = LAYOUT_preonic_grid(
-  KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,  KC_5,   KC_6,   KC_7,  KC_8,    KC_9,    KC_0,    KC_BSPC,
-  TAB_10KEY, KC_Q,    KC_W,    KC_F,    KC_P,  KC_G,   KC_J,   KC_L,  KC_U,    KC_Y,    KC_SCLN, KC_DEL,
-  ESC_CAP,   KC_A,    KC_R,    KC_S,    KC_T,  KC_D,   KC_H,   KC_N,  KC_E,    KC_I,    KC_O,    KC_QUOT,
-  KC_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,   KC_K,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-  FUNC_MO,   MOUS_MO, _______, _______, LOWER, SPC_MV, SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,  KC_5,   KC_6,   KC_7,  KC_8,    KC_9,    KC_0,    KC_BSPC,
+  TAB_10,  KC_Q,    KC_W,    KC_F,    KC_P,  KC_G,   KC_J,   KC_L,  KC_U,    KC_Y,    KC_SCLN, KC_DEL,
+  ESC_CAP, KC_A,    KC_R,    KC_S,    KC_T,  KC_D,   KC_H,   KC_N,  KC_E,    KC_I,    KC_O,    KC_QUOT,
+  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,   KC_K,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
+  FUNC_MO, MOUS_MO, _______, _______, LOWER, SPC_MV, SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Dvorak
@@ -193,11 +196,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // KC_DEL: DEL
 
 [_DVORAK] = LAYOUT_preonic_grid(
-  KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-  TAB_10KEY, KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,   KC_F,   KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
-  ESC_CAP,   DHOME_A, DHOME_O, DHOME_E, DHOME_U, KC_I,   KC_D,   DHOME_H, DHOME_T, DHOME_N, DHOME_S, KC_ENT,
-  KC_LSFT,   KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,   KC_B,   KC_M,    KC_W,    KC_V,    KC_Z,    KC_RSFT,
-  FUNC_MO,   MOUS_MO, _______, _______, LOWER,   SPC_MV, SPC_MV, RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,   KC_5,   KC_6,   KC_7,   KC_8,    KC_9,    KC_0,   KC_BSPC,
+  TAB_10,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,   KC_Y,   KC_F,   KC_G,   KC_C,    KC_R,    KC_L,   KC_SLSH,
+  ESC_CAP, DVRK_A,  DVRK_O,  DVRK_E,  DVRK_U, KC_I,   KC_D,   DVRK_H, DVRK_T,  DVRK_N,  DVRK_S, KC_ENT,
+  KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,   KC_X,   KC_B,   KC_M,   KC_W,    KC_V,    KC_Z,   KC_RSFT,
+  FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT
 ),
 
 /* Beakl 15 (https://deskthority.net/wiki/BEAKL)
@@ -215,12 +218,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // KC_DEL: DEL
 [_BEAKL15] = LAYOUT_preonic_grid(
-  KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,  KC_5,    KC_6,   KC_7,  KC_8,    KC_9,    KC_0,  KC_BSPC,
-  TAB_10KEY, KC_Q,    KC_H,    KC_O,    KC_U,  KC_X,    KC_G,   KC_C,  KC_R,    KC_F,    KC_Z,  KC_SCLN,    
-  ESC_CAP,   KC_Y,    KC_I,    KC_E,    KC_A,  KC_DOT,  KC_D,   KC_S,  KC_T,    KC_N,    KC_B,  KC_ENT, 
-  KC_LSFT,   KC_J,    KC_SLSH, KC_COMM, KC_K,  KC_QUOT, KC_W,   KC_M,  KC_L,    KC_P,    KC_V,  KC_RSFT,  
-  FUNC_MO,   MOUS_MO, _______, _______, LOWER, SPC_MV,  SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT
-),
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,  KC_5,    KC_6,   KC_7,  KC_8,    KC_9,    KC_0,  KC_BSPC,
+  TAB_10,  KC_Q,    KC_H,    KC_O,    KC_U,  KC_X,    KC_G,   KC_C,  KC_R,    KC_F,    KC_Z,  KC_SCLN,    
+  ESC_CAP, KC_Y,    KC_I,    KC_E,    KC_A,  KC_DOT,  KC_D,   KC_S,  KC_T,    KC_N,    KC_B,  KC_ENT, 
+  KC_LSFT, KC_J,    KC_SLSH, KC_COMM, KC_K,  KC_QUOT, KC_W,   KC_M,  KC_L,    KC_P,    KC_V,  KC_RSFT,  
+  FUNC_MO, MOUS_MO, _______, _______, LOWER, SPC_MV,  SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT
+  ),
 
 /* Programmer
  * ,-----------------------------------------------------------------------------------.
