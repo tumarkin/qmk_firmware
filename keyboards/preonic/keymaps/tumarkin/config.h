@@ -51,12 +51,14 @@
 #define PERMISSIVE_HOLD
 
 // Mouse key configuration
-#define MK_KINETIC_SPEED
-#define MK_COMBINED
+// #define MK_KINETIC_SPEED
+// #define MK_KINETIC_SPEED
+// #define MK_COMBINED
 
-#define MOUSEKEY_INTERVAL 15
-#define MOUSEKEY_MOVE_DELTA 1
-#define MOUSEKEY_MAX_SPEED 20
+// #define MOUSEKEY_BASE_SPEED 200
+// #define MOUSEKEY_INTERVAL 15
+// #define MOUSEKEY_MOVE_DELTA 1
+// #define MOUSEKEY_MAX_SPEED 20
 // #define MK_C_INTERVAL_0 15
 // #define MK_C_OFFSET_0 5
 // #define MOUSEKEY_TIME_TO_MAX 50
@@ -71,4 +73,21 @@
 
 
 #define COMBO_COUNT 3
+
+
+#define MK_KINETIC_SPEED
+// Delay between pressing a movement key and cursor movement
+#define MOUSEKEY_DELAY 8
+// Time between cursor movements in milliseconds
+#define MOUSEKEY_INTERVAL 8
+// Step size for accelerating from initial to base speed
+#define MOUSEKEY_MOVE_DELTA 1
+// Initial speed of the cursor in pixel per second
+#define MOUSEKEY_INITIAL_SPEED 2
+// Maximum cursor speed at which acceleration stops
+#define MOUSEKEY_BASE_SPEED 60
+// Decelerated cursor speed
+#define MOUSEKEY_DECELERATED_SPEED 18
+// Accelerated cursor speed
+#define MOUSEKEY_ACCELERATED_SPEED 250
 
