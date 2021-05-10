@@ -74,6 +74,7 @@
 
 #define COMBO_COUNT 3
 
+// The mousekey functions are defined in quantum/mousekey.c
 
 #define MK_KINETIC_SPEED
 // Delay between pressing a movement key and cursor movement
@@ -82,12 +83,17 @@
 #define MOUSEKEY_INTERVAL 8
 // Step size for accelerating from initial to base speed
 #define MOUSEKEY_MOVE_DELTA 1
+// Maximum cursor speed at which acceleration stops
+#define MOUSEKEY_MAX_SPEED 80
+// Time until maximum cursor speed is reached
+#define MOUSEKEY_TIME_TO_MAX 200
 // Initial speed of the cursor in pixel per second
 #define MOUSEKEY_INITIAL_SPEED 2
-// Maximum cursor speed at which acceleration stops
-#define MOUSEKEY_BASE_SPEED 60
-// Decelerated cursor speed
-#define MOUSEKEY_DECELERATED_SPEED 18
-// Accelerated cursor speed
-#define MOUSEKEY_ACCELERATED_SPEED 250
+// // Maximum cursor speed at which acceleration stops
+// #define MOUSEKEY_BASE_SPEED 60
+// // Decelerated cursor speed
+#define MOUSEKEY_DECELERATED_SPEED 1
+// // Accelerated cursor speed
+// #define MOUSEKEY_ACCELERATED_SPEED 250
+
 
