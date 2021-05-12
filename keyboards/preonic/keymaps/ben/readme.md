@@ -7,7 +7,6 @@
     - Shift
 
 - Caps lock activated by ZX combo
-- Ten key activated holding Qwerty location G or R on the left hand
 - Movement mode activate by holding space
 
 
