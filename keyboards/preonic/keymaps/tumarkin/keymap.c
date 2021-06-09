@@ -112,6 +112,7 @@ float tone_beakl[][2]     = SONG(ZELDA_TREASURE);
 float tone_prog_on[][2]   = SONG(MARIO_MUSHROOM);
 float tone_prog_off[][2]  = SONG(CLOSE_ENCOUNTERS_5_NOTE);
 float tone_caps_lock[][2] = SONG(COIN_SOUND);
+float tone_tenkey[][2]        = SONG(GUITAR_SOUND);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Layers
@@ -121,6 +122,7 @@ enum preonic_layers {
   _COLEMAK,
   _DVORAK,
   _BEAKL15,
+  _HANDSDOWN,
   _PROGRAMMER,
   _LOWER,
   _RAISE,
@@ -204,7 +206,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Func | Mouse|      |      |Lower | Space/Arrow |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
-// KC_DEL: DEL
 
 [_DVORAK] = LAYOUT_preonic_grid(
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,   KC_5,   KC_6,   KC_7,   KC_8,    KC_9,    KC_0,   KC_BSPC,
@@ -227,13 +228,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Func | Mouse|10 Key|      |Lower | Space/Arrow |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
-// KC_DEL: DEL
 [_BEAKL15] = LAYOUT_preonic_grid(
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,   KC_5,    KC_6,   KC_7,  KC_8,    KC_9,    KC_0,   KC_BSPC,
   KC_TAB,  KC_Q,    KC_H,    KC_O,    BEKL_U, KC_X,    KC_G,   KC_C,  KC_R,    KC_F,    KC_Z,   KC_SCLN,    
   ESC_MO,  BEKL_Y,  BEKL_I,  BEKL_E,  BEKL_A, BEKLDT,  KC_D,   BEKL_S, BEKL_T, BEKL_N,  BEKL_B, KC_ENT, 
   KC_LSFT, KC_J,    KC_SLSH, KC_COMM, KC_K,   KC_QUOT, KC_W,   KC_M,  KC_L,    KC_P,    KC_V,   KC_RSFT,  
   FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV,  SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT
+  ),
+
+/* Hands Down (https://https://sites.google.com/alanreiser.com/handsdown)
+ * ,-----------------------------------------------------------------------------------.
+ * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Tab  |   Q  |   C  |   H  |   P  |   V  |   K  |   Y  |   O  |   J  |   /  | ;    |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |Esc/Mo|   R  |   S  |   N  |   T  |   G  |   W  |   U  |   E  |   I  |   A  |Enter |
+ * |------+------+------+------+------+------|------+------+------+------+------+-----
+ * | Shift|   X  |   M  |   L  |   D  |   B  |   Z  |   M  |   '  |   ,  |   .  |Shift |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Func | Mouse|10 Key|      |Lower | Space/Arrow |Raise | Left | Down |  Up  |Right |
+ * `-----------------------------------------------------------------------------------'
+ */
+
+[_HANDSDOWN] = LAYOUT_preonic_grid(
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,   KC_5,    KC_6,   KC_7,  KC_8,    KC_9,    KC_0,      KC_BSPC,
+  KC_TAB,  KC_Q,    KC_C,    KC_H,    KC_P,   KC_V,    KC_K,   KC_Y,  KC_O,    KC_J,    KC_SLSH,   KC_SCLN,    
+  ESC_MO,  KC_R,    KC_S,    KC_N,    KC_T,   KC_G,    KC_W,   KC_U,  KC_E,    KC_I,    KC_A,      KC_ENT, 
+  KC_LSFT, KC_X,    KC_M,    KC_L,    KC_D,   KC_B,    KC_Z,   KC_M,  KC_QUOT, KC_COMM, KC_DOT,    KC_RSFT,  
+  FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV,  SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
   ),
 
 /* Programmer
@@ -659,19 +681,22 @@ bool music_mask_user(uint16_t keycode) {
 enum combos {
     SHIFTS_QWERTY,
     SHIFTS_DVORAK,
-    SHIFTS_BEKL
+    SHIFTS_BEKL,
+    TENKEY_QWERTY
 };
 
 const uint16_t PROGMEM shifts_querty_combo[] = {KC_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM shifts_dvorak_combo[] = {KC_SCLN, KC_Q, COMBO_END};
 const uint16_t PROGMEM shifts_bekl_combo[]   = {KC_J, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM tenkey_querty_combo[] = {KC_Z, KC_C, COMBO_END};
 
 
 
 combo_t key_combos[COMBO_COUNT] = {
     [SHIFTS_QWERTY] = COMBO_ACTION(shifts_querty_combo),
     [SHIFTS_DVORAK] = COMBO_ACTION(shifts_dvorak_combo),
-    [SHIFTS_BEKL] = COMBO_ACTION(shifts_bekl_combo)
+    [SHIFTS_BEKL]   = COMBO_ACTION(shifts_bekl_combo),
+    [TENKEY_QWERTY] = COMBO_ACTION(tenkey_querty_combo),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -685,6 +710,15 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             #endif //AUDIO_ENABLE
             tap_code_delay(KC_CAPS,500);
             // SEND_STRING(SS_TAP(KC_CAP));
+            }
+        break;
+
+        case TENKEY_QWERTY:
+            if (pressed) {
+                layer_invert(_TENKEY);
+                #ifdef AUDIO_ENABLE
+                    PLAY_SONG(tone_tenkey);
+                #endif //AUDIO_ENABLE
             }
         break;
     }
