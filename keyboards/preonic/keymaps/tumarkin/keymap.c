@@ -86,6 +86,21 @@
 #define BEKL_U LT(_TENKEY, KC_U)
 #define BEKLDT LT(_TENKEY, KC_DOT)
 
+// HANDS DOWN HOME ROW ALIASES
+// Left-hand home row mods
+#define HNDS_R LCTL_T(KC_R)
+#define HNDS_S LALT_T(KC_S)
+#define HNDS_N LGUI_T(KC_N)
+#define HNDS_T LSFT_T(KC_T)
+// Right-hand home row mods
+#define HNDS_U RSFT_T(KC_U)
+#define HNDS_E RGUI_T(KC_E)
+#define HNDS_I LALT_T(KC_I)
+#define HNDS_A RCTL_T(KC_A)
+// 10 key toggles
+#define HNDS_G LT(_TENKEY, KC_G)
+#define HNDS_P LT(_TENKEY, KC_P)
+
 // Mouse key aliases
 #define MS_AC_0 KC_MS_ACCEL0
 #define MS_AC_1 KC_MS_ACCEL1
@@ -253,11 +268,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_HANDSDOWN] = LAYOUT_preonic_grid(
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,   KC_5,    KC_6,   KC_7,  KC_8,    KC_9,    KC_0,      KC_BSPC,
-  KC_TAB,  KC_Q,    KC_C,    KC_H,    KC_P,   KC_V,    KC_K,   KC_Y,  KC_O,    KC_J,    KC_SLSH,   KC_SCLN,    
-  ESC_MO,  KC_R,    KC_S,    KC_N,    KC_T,   KC_G,    KC_W,   KC_U,  KC_E,    KC_I,    KC_A,      KC_ENT, 
-  KC_LSFT, KC_X,    KC_M,    KC_L,    KC_D,   KC_B,    KC_Z,   KC_F,  KC_QUOT, KC_COMM, KC_DOT,    KC_RSFT,  
-  FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV,  SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
+  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,   KC_5,    KC_6,   KC_7,   KC_8,    KC_9,    KC_0,    KC_BSPC,
+  KC_TAB,  KC_Q,    KC_C,    KC_H,    HNDS_P, KC_V,    KC_K,   KC_Y,   KC_O,    KC_J,    KC_SLSH, KC_SCLN,    
+  ESC_MO,  HNDS_R,  HNDS_S,  HNDS_N,  HNDS_T, HNDS_G,  KC_W,   HNDS_U, HNDS_E,  HNDS_I,  HNDS_A,  KC_ENT, 
+  KC_LSFT, KC_X,    KC_M,    KC_L,    KC_D,   KC_B,    KC_Z,   KC_F,   KC_QUOT, KC_COMM, KC_DOT,  KC_RSFT,  
+  FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV,  SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
   ),
 
 /* Programmer
