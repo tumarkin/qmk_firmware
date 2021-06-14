@@ -1,4 +1,4 @@
-/* Copyright 2015-2017 Jack Humbert
+/* Copyright 2015-2017 Jack HumbertN
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -105,14 +105,15 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Audio stuff
 ////////////////////////////////////////////////////////////////////////////////
-float tone_qwerty[][2]    = SONG(QWERTY_SOUND);
-float tone_colemak[][2]   = SONG(COLEMAK_SOUND);
-float tone_dvorak[][2]    = SONG(DVORAK_SOUND);
-float tone_beakl[][2]     = SONG(ZELDA_TREASURE);
-float tone_prog_on[][2]   = SONG(MARIO_MUSHROOM);
-float tone_prog_off[][2]  = SONG(CLOSE_ENCOUNTERS_5_NOTE);
-float tone_caps_lock[][2] = SONG(COIN_SOUND);
-float tone_tenkey[][2]        = SONG(GUITAR_SOUND);
+float tone_qwerty[][2]             = SONG(QWERTY_SOUND);
+float tone_colemak[][2]            = SONG(COLEMAK_SOUND);
+float tone_dvorak[][2]             = SONG(DVORAK_SOUND);
+float tone_beakl[][2]              = SONG(ZELDA_TREASURE);
+float tone_prog_on[][2]            = SONG(MARIO_MUSHROOM);
+float tone_prog_off[][2]           = SONG(CLOSE_ENCOUNTERS_5_NOTE);
+float tone_caps_lock[][2]          = SONG(COIN_SOUND);
+float tone_tenkey_activate[][2]    = SONG(GUITAR_SOUND);
+float tone_tenkey_deactivate[][2]  = SONG(GUITAR_SOUND_DOWN);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Layers
@@ -138,6 +139,7 @@ enum preonic_keycodes {
   QWERTY = SAFE_RANGE,
   COLEMAK,
   DVORAK,
+  HANDDWN,
   BEAKL15,
   PROG_ON,
   PROG_OFF,
@@ -244,7 +246,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |Esc/Mo|   R  |   S  |   N  |   T  |   G  |   W  |   U  |   E  |   I  |   A  |Enter |
  * |------+------+------+------+------+------|------+------+------+------+------+-----
- * | Shift|   X  |   M  |   L  |   D  |   B  |   Z  |   M  |   '  |   ,  |   .  |Shift |
+ * | Shift|   X  |   M  |   L  |   D  |   B  |   Z  |   F  |   '  |   ,  |   .  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Func | Mouse|10 Key|      |Lower | Space/Arrow |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
@@ -254,7 +256,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,   KC_5,    KC_6,   KC_7,  KC_8,    KC_9,    KC_0,      KC_BSPC,
   KC_TAB,  KC_Q,    KC_C,    KC_H,    KC_P,   KC_V,    KC_K,   KC_Y,  KC_O,    KC_J,    KC_SLSH,   KC_SCLN,    
   ESC_MO,  KC_R,    KC_S,    KC_N,    KC_T,   KC_G,    KC_W,   KC_U,  KC_E,    KC_I,    KC_A,      KC_ENT, 
-  KC_LSFT, KC_X,    KC_M,    KC_L,    KC_D,   KC_B,    KC_Z,   KC_M,  KC_QUOT, KC_COMM, KC_DOT,    KC_RSFT,  
+  KC_LSFT, KC_X,    KC_M,    KC_L,    KC_D,   KC_B,    KC_Z,   KC_F,  KC_QUOT, KC_COMM, KC_DOT,    KC_RSFT,  
   FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV,  SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
   ),
 
@@ -424,7 +426,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_preonic_grid(
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F11,  KC_F12,
   _______, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF, _______, _______, _______,
-  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK,  DVORAK,  BEAKL15, _______,
+  _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  COLEMAK,  DVORAK,  HANDDWN, _______,
   _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  PROG_ON, PROG_OFF, _______, BACKLIT, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
 ),
@@ -441,6 +443,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_COLEMAK);
             layer_off(_DVORAK);
             layer_off(_BEAKL15);
+            layer_off(_HANDSDOWN);
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_qwerty);
             #endif //AUDIO_ENABLE
@@ -455,6 +458,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_on(_COLEMAK);
             layer_off(_DVORAK);
             layer_off(_BEAKL15);
+            layer_off(_HANDSDOWN);
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_colemak);
             #endif //AUDIO_ENABLE
@@ -469,6 +473,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_COLEMAK);
             layer_on(_DVORAK);
             layer_off(_BEAKL15);
+            layer_off(_HANDSDOWN);
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_dvorak);
             #endif //AUDIO_ENABLE
@@ -483,6 +488,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_COLEMAK);
             layer_off(_DVORAK);
             layer_on(_BEAKL15);
+            layer_off(_HANDSDOWN);
+            #ifdef AUDIO_ENABLE
+                PLAY_SONG(tone_beakl);
+            #endif //AUDIO_ENABLE
+          }
+          return false;
+          break;
+        case HANDDWN:
+          if (record->event.pressed) {
+            // set_single_persistent_default_layer(_BEAKL15);
+            default_layer_set(_HANDSDOWN);
+            layer_off(_QWERTY);
+            layer_off(_COLEMAK);
+            layer_off(_DVORAK);
+            layer_off(_BEAKL15);
+            layer_on(_HANDSDOWN);
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_beakl);
             #endif //AUDIO_ENABLE
@@ -717,7 +738,10 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             if (pressed) {
                 layer_invert(_TENKEY);
                 #ifdef AUDIO_ENABLE
-                    PLAY_SONG(tone_tenkey);
+                    if (IS_LAYER_ON(_TENKEY))
+                        PLAY_SONG(tone_tenkey_activate);
+                    else
+                        PLAY_SONG(tone_tenkey_deactivate);
                 #endif //AUDIO_ENABLE
             }
         break;

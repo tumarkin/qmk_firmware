@@ -94,6 +94,8 @@
 
 #define GUITAR_SOUND Q__NOTE(_E5), Q__NOTE(_A5), Q__NOTE(_D6), Q__NOTE(_G6),
 
+#define GUITAR_SOUND_DOWN Q__NOTE(_G6), Q__NOTE(_D6), Q__NOTE(_A5), Q__NOTE(_E5),
+
 #define VIOLIN_SOUND Q__NOTE(_G5), Q__NOTE(_D6), Q__NOTE(_A6), Q__NOTE(_E7),
 
 #define CAPS_LOCK_ON_SOUND E__NOTE(_A3), E__NOTE(_B3),
