@@ -57,7 +57,6 @@ enum preonic_layers {
   _QWERTY,
   _COLEMAK,
   _DVORAK,
-  _BEAKL15,
   _HANDSDOWN,
   _PROGRAMMER,
   _LOWER,
@@ -75,7 +74,6 @@ enum preonic_keycodes {
   COLEMAK,
   DVORAK,
   HANDDWN,
-  BEAKL15,
   PROG_ON,
   PROG_OFF,
   LOWER,
@@ -152,28 +150,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,   KC_X,   KC_B,   KC_M,   KC_W,    KC_V,    KC_Z,   KC_RSFT,
   FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT
 ),
-
-/* Beakl 15 (https://deskthority.net/wiki/BEAKL)
- * ,-----------------------------------------------------------------------------------.
- * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Tab  |   Q  |   H  |   O  |   U  |   X  |   G  |   C  |   R  |   F  |   Z  | ;    |
- * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |Esc/Mo|   Y  |   I  |   E  |   A  |   .  |   D  |   S  |   T  |   N  |   B  |Enter |
- * |------+------+------+------+------+------|------+------+------+------+------+-----
- * | Shift|   J  |   /  |   ,  |   K  |   "  |   W  |   M  |   L  |   P  |   V  |Shift |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Func | Mouse|10 Key|      |Lower | Space/Arrow |Raise | Left | Down |  Up  |Right |
- * `-----------------------------------------------------------------------------------'
- */
-[_BEAKL15] = LAYOUT_preonic_grid(
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,   KC_5,    KC_6,   KC_7,  KC_8,    KC_9,    KC_0,   KC_BSPC,
-  KC_TAB,  KC_Q,    KC_H,    KC_O,    BEKL_U, KC_X,    KC_G,   KC_C,  KC_R,    KC_F,    KC_Z,   KC_SCLN,    
-  ESC_MO,  BEKL_Y,  BEKL_I,  BEKL_E,  BEKL_A, BEKLDT,  KC_D,   BEKL_S, BEKL_T, BEKL_N,  BEKL_B, KC_ENT, 
-  KC_LSFT, KC_J,    KC_SLSH, KC_COMM, KC_K,   KC_QUOT, KC_W,   KC_M,  KC_L,    KC_P,    KC_V,   KC_RSFT,  
-  FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV,  SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT
-  ),
-
 /* Hands Down (https://https://sites.google.com/alanreiser.com/handsdown)
  * ,-----------------------------------------------------------------------------------.
  * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
@@ -375,7 +351,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | Reset| Debug|      |      |      |      |TermOf|TermOn|      |      |      |  
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |Aud cy|Aud on|AudOff|AGnorm|AGswap|Qwerty|Colemk|Dvorak| BEAKL|      |
+ * |      |      |Aud cy|Aud on|AudOff|AGnorm|AGswap|Qwerty|Colemk|Dvorak| Hands|      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |Voice-|Voice+|Mus on|MusOff|MidiOn|MidOff|PrgOn |PrgOff|      |Backlt|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -401,7 +377,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_on(_QWERTY);
             layer_off(_COLEMAK);
             layer_off(_DVORAK);
-            layer_off(_BEAKL15);
             layer_off(_HANDSDOWN);
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_qwerty);
@@ -416,7 +391,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_QWERTY);
             layer_on(_COLEMAK);
             layer_off(_DVORAK);
-            layer_off(_BEAKL15);
             layer_off(_HANDSDOWN);
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_colemak);
@@ -431,7 +405,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             layer_off(_QWERTY);
             layer_off(_COLEMAK);
             layer_on(_DVORAK);
-            layer_off(_BEAKL15);
             layer_off(_HANDSDOWN);
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_dvorak);
@@ -439,29 +412,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
           break;
-        case BEAKL15:
-          if (record->event.pressed) {
-            // set_single_persistent_default_layer(_BEAKL15);
-            default_layer_set(_BEAKL15);
-            layer_off(_QWERTY);
-            layer_off(_COLEMAK);
-            layer_off(_DVORAK);
-            layer_on(_BEAKL15);
-            layer_off(_HANDSDOWN);
-            #ifdef AUDIO_ENABLE
-                PLAY_SONG(tone_beakl);
-            #endif //AUDIO_ENABLE
-          }
-          return false;
-          break;
         case HANDDWN:
           if (record->event.pressed) {
-            // set_single_persistent_default_layer(_BEAKL15);
             default_layer_set(_HANDSDOWN);
             layer_off(_QWERTY);
             layer_off(_COLEMAK);
             layer_off(_DVORAK);
-            layer_off(_BEAKL15);
             layer_on(_HANDSDOWN);
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_beakl);
@@ -520,21 +476,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           #endif
           return false;
           break;
-        case KC_CAPS:
-          #ifdef AUDIO_ENABLE
-            PLAY_SONG(tone_caps_lock);
-          #endif
-          return true;
+        // case KC_CAPS:
+        //   #ifdef AUDIO_ENABLE
+        //     PLAY_SONG(tone_caps_lock);
+        //   #endif
+        //   return true;
+        //   break;
         case TB_SCRL:
           if (record->event.pressed) {
             led_t led_usb_state = host_keyboard_led_state();
             if (!led_usb_state.caps_lock) {
               register_code(KC_CAPS);
-            }}
-            else {
+            }
+          } else {
               register_code(KC_CAPS);
           }
           return false;
+          break;
       }
     return true;
 };
@@ -670,7 +628,7 @@ bool music_mask_user(uint16_t keycode) {
 enum combos {
     SHIFTS_QWERTY,
     SHIFTS_DVORAK,
-    SHIFTS_BEKL,
+    // SHIFTS_BEKL,
     TENKEY_QWERTY,
     C_EQUALS,
     C_BACKSLASH,
@@ -692,7 +650,7 @@ const uint16_t PROGMEM expose_combo[]        = {KC_BTN1, KC_BTN2, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     [SHIFTS_QWERTY] = COMBO_ACTION(shifts_querty_combo),
     [SHIFTS_DVORAK] = COMBO_ACTION(shifts_dvorak_combo),
-    [SHIFTS_BEKL]   = COMBO_ACTION(shifts_bekl_combo),
+    // [SHIFTS_BEKL]   = COMBO_ACTION(shifts_bekl_combo),
     [TENKEY_QWERTY] = COMBO_ACTION(tenkey_querty_combo),
     [C_EQUALS]      = COMBO(equals_combo, KC_EQL),
     [C_BACKSLASH]   = COMBO(backslash_combo, KC_BSLS),
@@ -704,7 +662,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     switch(combo_index) {
         case SHIFTS_QWERTY:
         case SHIFTS_DVORAK:
-        case SHIFTS_BEKL:
+        // case SHIFTS_BEKL:
         if (pressed) {
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_caps_lock);
