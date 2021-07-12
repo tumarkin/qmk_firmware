@@ -72,7 +72,7 @@
 
 
 
-#define COMBO_COUNT 4
+#define COMBO_COUNT 8
 
 // The mousekey functions are defined in quantum/mousekey.c
 

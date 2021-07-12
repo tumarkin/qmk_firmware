@@ -9,7 +9,8 @@ enum sofle_layers {
     _PROGRAMMER,
     _LOWER,
     _RAISE,
-    _MOVEMENT,
+    _MOVEMENT_L,
+    _MOVEMENT_R,
     _ADJUST,
 };
 
@@ -26,7 +27,8 @@ enum custom_keycodes {
     KC_LEND,
     KC_DLINE,
     PROG_ON,
-    PROG_OFF
+    PROG_OFF,
+    TB_SCRL
 };
 
 
@@ -52,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT, \
   KC_ESC,  QWRT_A,  QWRT_S,  QWRT_D,  QWRT_F,  KC_G,                      KC_H,    QWRT_J,  QWRT_K,  QWRT_L,  QWRT_SC, KC_ENT, \
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE, KC_MPLY, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
-                 XXXXXXX,  XXXXXXX, XXXXXXX, KC_LOWER, SPC_MV,     SPC_MV, KC_RAISE, XXXXXXX,XXXXXXX,XXXXXXX \
+                 TB_SCRL,  XXXXXXX, XXXXXXX, KC_LOWER, SPC_MVL,    SPC_MVR, KC_RAISE, XXXXXXX,XXXXXXX,XXXXXXX \
 ),
 /*
  * DVORAK
@@ -79,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /*
  * HANDSDOWN
- * ,----l-------------------------------------.                    ,-----------------------------------------.
+ * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |   Q  |   C  |   H  |   P  |   V  |                    |   K  |   Y  |   O  |   J  |   /  |  ;   |
@@ -146,9 +148,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |   <  |   >  |      |                    |      |      |      |      |      |      |
+ * |      |      |      |   <  |   >  |      |                    |      |   +  |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |   {  |   }  |   (  |   )  |      |-------.    ,-------|      |   -  |   _  |      |      |      |
+ * |      |   {  |   }  |   (  |   )  |      |-------.    ,-------|      |   -  |   _  |   =  |   |  |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |   [  |   ]  |      |-------|    |-------|      |      |      |      |      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -158,8 +160,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 [_RAISE] = LAYOUT( \
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
-  _______, _______, _______, KC_LT,   KC_GT,   _______,                   _______, _______, _______, _______, _______, _______, 
-  _______, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, _______,                   _______, KC_MINS, KC_UNDS, _______, _______, KC_PIPE,
+  _______, _______, _______, KC_LT,   KC_GT,   _______,                   _______, KC_PLUS, _______, _______, _______, _______, 
+  _______, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, _______,                   _______, KC_MINS, KC_UNDS, KC_EQL,  KC_PIPE, _______,
   _______, _______, _______, KC_LBRC, KC_RBRC, _______, _______, _______, _______, _______, _______, _______, KC_BSLS, _______, 
                        _______, _______, _______, _______, KC_BSPC,       _______, _______, _______, _______, _______\
 ),
@@ -199,12 +201,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
-[_MOVEMENT] = LAYOUT(
+[_MOVEMENT_L] = LAYOUT(
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
   _______, _______, _______, _______, _______, _______,                   KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______, 
   _______, _______, _______, _______, _______, _______,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______, 
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
                  _______,  _______, _______, _______, _______,      KC_DEL, _______,  _______,_______,_______ \
+),
+/* Movement
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |                    |      | Home | Pg Dn| Pg Up|  End |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |-------.    ,-------|      | Left | Down |  Up  | Right|      |
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *            |      |      |      |      | /  BSPC /       \      \  |      |      |      |      |
+ *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+ *            `----------------------------------'           '------''---------------------------'
+ */
+[_MOVEMENT_R] = LAYOUT(
+  _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
+  _______, _______, _______, _______, _______, _______,                   KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______, 
+  _______, _______, _______, _______, _______, _______,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______, 
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
+                 _______,  _______, _______, _______, KC_BSPC,      _______, _______,  _______,_______,_______ \
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -294,7 +317,8 @@ static void print_status_narrow(void) {
         case _ADJUST:
             oled_write_P(PSTR("Adj\n"), false);
             break;
-        case _MOVEMENT:
+        case _MOVEMENT_L:
+        case _MOVEMENT_R:
             oled_write_P(PSTR("Move\n"), false);
             break;
         default:
@@ -303,6 +327,8 @@ static void print_status_narrow(void) {
     oled_write_P(PSTR("\n\n"), false);
     led_t led_usb_state = host_keyboard_led_state();
     oled_write_ln_P(PSTR("CPSLK"), led_usb_state.caps_lock);
+    oled_write_ln_P(PSTR("NUMLK"), led_usb_state.num_lock);
+    oled_write_ln_P(PSTR("SCRLK"), led_usb_state.scroll_lock);
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -490,6 +516,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_Z);
             }
             return false;
+        case TB_SCRL:
+            if (record->event.pressed) {
+                led_t led_usb_state = host_keyboard_led_state();
+                if (!led_usb_state.caps_lock) {
+                    register_code(KC_CAPS);
+                }
+            } else {
+                register_code(KC_CAPS);
+            }
+            return false;
         case PROG_ON:
           layer_on(_PROGRAMMER);
           return false;
@@ -529,7 +565,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 // Combos
 ////////////////////////////////////////////////////////////////////////////////
 enum combos {
-    SHIFTS_QWERTY,
+    C_SHIFTS_QWERTY,
     // SHIFTS_DVORAK,
     // TENKEY_QWERTY,
     C_BACKSLASH,
@@ -545,7 +581,7 @@ const uint16_t PROGMEM pipe_combo[]          = {KC_DOT, KC_SLSH, COMBO_END};
 
 
 combo_t key_combos[COMBO_COUNT] = {
-    [SHIFTS_QWERTY] = COMBO(shifts_querty_combo, KC_CAPS),
+    [C_SHIFTS_QWERTY] = COMBO(shifts_querty_combo, KC_CAPS),
     // [SHIFTS_DVORAK] = COMBO_ACTION(shifts_dvorak_combo),
     // [SHIFTS_BEKL]   = COMBO_ACTION(shifts_bekl_combo),
     // [TENKEY_QWERTY] = COMBO_ACTION(tenkey_querty_combo),

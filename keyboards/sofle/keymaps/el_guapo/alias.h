@@ -56,7 +56,8 @@
 // #define PROG_TG TG(_PROGRAMMER)
 // #define FUNC_MO MO(_FUNCTIONS)
 // #define MOUS_MO MO(_MOUSE)
-#define SPC_MV  LT(_MOVEMENT, KC_SPC)
+#define SPC_MVL  LT(_MOVEMENT_L, KC_SPC)
+#define SPC_MVR  LT(_MOVEMENT_R, KC_SPC)
 // #define ESC_MO  LT(_MOUSE, KC_ESC)
 
 #endif // alias_h_INCLUDED
