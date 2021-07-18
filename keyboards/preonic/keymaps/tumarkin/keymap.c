@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Shift |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Func | Mouse| Btn1 | Btn2 |Lower | Space/Arrow |Raise | Left | Down |  Up  |Right |
+ * | Func | Mouse| Btn2 | Btn1 |Lower | Space/Arrow |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 // KC_DEL: DE
@@ -105,9 +105,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    QWRT_R, KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,      KC_QUOT, 
   ESC_MO,  QWRT_A,  QWRT_S,  QWRT_D,  QWRT_F, QWRT_G, KC_H,   QWRT_J, QWRT_K,  QWRT_L,  QWRT_SCLN, KC_ENT,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
-  FUNC_MO, TB_SCRL, KC_BTN1, KC_BTN2, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
+  FUNCSHN, TB_SCRL, KC_BTN2, KC_BTN1, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
 ),
-
 /* Colemak
  * ,-----------------------------------------------------------------------------------.
  * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
@@ -126,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,  KC_G,   KC_J,   KC_L,  KC_U,    KC_Y,    KC_SCLN, KC_DEL,
   ESC_MO,  KC_A,    KC_R,    KC_S,    KC_T,  KC_D,   KC_H,   KC_N,  KC_E,    KC_I,    KC_O,    KC_QUOT,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,   KC_K,   KC_M,  KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-  FUNC_MO, MOUS_MO, _______, _______, LOWER, SPC_MV, SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+  FUNCSHN, TB_SCRL, KC_BTN2, KC_BTN1, LOWER, SPC_MV, SPC_MV, RAISE, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Dvorak
@@ -148,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  DVRK_P, KC_Y,   KC_F,   KC_G,   KC_C,    KC_R,    KC_L,   KC_SLSH,
   ESC_MO,  DVRK_A,  DVRK_O,  DVRK_E,  DVRK_U, DVRK_I, KC_D,   DVRK_H, DVRK_T,  DVRK_N,  DVRK_S, KC_ENT,
   KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,   KC_X,   KC_B,   KC_M,   KC_W,    KC_V,    KC_Z,   KC_RSFT,
-  FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT
+  FUNCSHN, TB_SCRL, KC_BTN2, KC_BTN1, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,  KC_RGHT
 ),
 /* Hands Down (https://https://sites.google.com/alanreiser.com/handsdown)
  * ,-----------------------------------------------------------------------------------.
@@ -169,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_C,    KC_H,    HNDS_P, KC_V,    KC_K,   KC_Y,   KC_O,    KC_J,    KC_SLSH, KC_SCLN,    
   ESC_MO,  HNDS_R,  HNDS_S,  HNDS_N,  HNDS_T, HNDS_G,  KC_W,   HNDS_U, HNDS_E,  HNDS_I,  HNDS_A,  KC_ENT, 
   KC_LSFT, KC_X,    KC_M,    KC_L,    KC_D,   KC_B,    KC_Z,   KC_F,   KC_QUOT, KC_COMM, KC_DOT,  KC_RSFT,  
-  FUNC_MO, MOUS_MO, _______, _______, LOWER,  SPC_MV,  SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+  FUNCSHN, TB_SCRL, KC_BTN2, KC_BTN1, LOWER,  SPC_MV,  SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
   ),
 
 /* Programmer
@@ -306,21 +305,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |Speed0|Speed1|Speed2|      |      | Btn1 |  Up  | Btn2 | Btn2 |      |
+ * |      |      |S-Btn2|S-Btn1|      |      |      |      |  Up  |      | Spd1 |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |      |      |      |      |      | Left | Down | Right| Btn1 |      |
+ * |      |      | Btn2 | Btn1 |      |      |      | Left | Down | Right| Spd0 |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |Speed0|Speed1|Speed2|      |      |      |      |      |      |      |
+ * |      |      |O-Btn2|O-Btn1|      |      |      |      |      |      | Spd2 |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_MOUSE] = LAYOUT_preonic_grid(
-  _______, _______, _______,      _______,      _______,      _______, _______, _______, _______, _______, _______, _______, 
-  _______, _______, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2, _______, _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_BTN2, _______, 
-  _______, _______, _______,      _______,      _______,      _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, _______, 
-  _______, _______, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2, _______, _______, _______, _______, _______, _______, _______, 
-  _______, _______, _______,      _______,      _______,      _______, _______, _______, _______, _______, _______, _______ 
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,      _______, 
+  _______, _______, S(KC_BTN2), S(KC_BTN1), _______, _______, _______, _______, KC_MS_U, _______, KC_MS_ACCEL1, _______, 
+  _______, _______, KC_BTN2, KC_BTN1, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_MS_ACCEL0, _______, 
+  _______, _______, G(KC_BTN2), G(KC_BTN1), _______, _______, _______, _______, _______, _______, KC_MS_ACCEL2, _______, 
+  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ 
 ),
 
 /* Functions

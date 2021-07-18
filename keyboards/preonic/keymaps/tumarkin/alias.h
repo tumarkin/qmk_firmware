@@ -73,7 +73,7 @@
 
 // Custom key shortcuts
 #define PROG_TG TG(_PROGRAMMER)
-#define FUNC_MO MO(_FUNCTIONS)
+#define FUNCSHN MO(_FUNCTIONS)
 #define MOUS_MO MO(_MOUSE)
 #define SPC_MV  LT(_MOVEMENT, KC_SPC)
 #define ESC_MO  LT(_MOUSE, KC_ESC)
