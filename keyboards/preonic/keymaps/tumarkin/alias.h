@@ -90,3 +90,11 @@
 
 #endif // alias_h_INCLUDED
 
+// Buttons
+#define SH_BTN1 S(KC_BTN1)
+#define SH_BTN2 S(KC_BTN2)
+#define OP_BTN1 G(KC_BTN1)
+#define OP_BTN2 G(KC_BTN2)
+#define HYP_F15 HYPR(KC_F15)
+#define HYP_F14 HYPR(KC_F14)
+
