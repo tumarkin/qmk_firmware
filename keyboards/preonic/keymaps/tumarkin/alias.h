@@ -77,6 +77,8 @@
 #define MOUS_MO MO(_MOUSE)
 #define SPC_MV  LT(_MOVEMENT, KC_SPC)
 #define ESC_MO  LT(_MOUSE, KC_ESC)
+
+#define TB_UTIL LT(_MOUSE, HYP_F15)
 // #define ESC_CAP TD(TD_ESC_CAPS)
 // #define TAB_10  LT(_TENKEY, KC_TAB)
 // #define TENK_MO   MO(_TENKEY)
@@ -89,6 +91,9 @@
 #define KC_NEXT G(KC_RCBR)
 
 #endif // alias_h_INCLUDED
+
+// Expose
+#define KC_EXPS S(KC_UP)
 
 // Buttons
 #define SH_BTN1 S(KC_BTN1)

@@ -1,6 +1,10 @@
 #pragma once
 
-                                
+// The produce name needs to be redefined to work with setleds.
+// This statement will cause a conflict with the master config.h
+// should that file change. Simply update the master config.h
+// to make this work.
+#define PRODUCT         Preonic Keyboard
 
 #ifdef AUDIO_ENABLE
     #define STARTUP_SONG SONG(ZELDA_PUZZLE)
@@ -72,7 +76,7 @@
 
 
 
-#define COMBO_COUNT 8
+#define COMBO_COUNT 9
 
 // The mousekey functions are defined in quantum/mousekey.c
 
