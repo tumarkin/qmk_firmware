@@ -70,6 +70,31 @@ enum preonic_keycodes {
   KC_BTNR,
 };
 
+/// Tap dance keycodes, states, and functions
+enum td_keycodes {
+  TB_UTIL
+};
+
+typedef enum {
+  TD_NONE,
+  TD_UNKNOWN,
+  TD_SINGLE_TAP,
+  TD_SINGLE_HOLD
+} td_state_t;
+
+static td_state_t td_state;
+
+td_state_t cur_dance(qk_tap_dance_state_t *state);
+void tb_util_finished (qk_tap_dance_state_t *state, void *user_data);
+void tb_util_reset    (qk_tap_dance_state_t *state, void *user_data);
+
+
+
+/******************************************************************************/
+/* Layers                                                                     */
+/******************************************************************************/
+    
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
@@ -93,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    QWRT_R, KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,      KC_QUOT, 
   ESC_MO,  QWRT_A,  QWRT_S,  QWRT_D,  QWRT_F, QWRT_G, KC_H,   QWRT_J, QWRT_K,  QWRT_L,  QWRT_SCLN, KC_ENT,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
-  FUNCSHN, TB_UTIL, KC_BTN2, KC_BTN1, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
+  FUNCSHN, TD(TB_UTIL), KC_BTN2, KC_BTN1, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
 ),
 /* Dvorak
    ,-----------------------------------------------------------------------------------.
@@ -253,17 +278,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Exit |      |      | Btn2 | Btn1 |      |      | Left | Down | Right| Spd0 |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |S-Btn2|S-Btn1|O-Btn1|      |      |      |      |      | Spd2 |      |
+ * |      |      |O-Btn2|O-Btn1|O-Btn1|      |      |      |      |      | Spd2 |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |             |      |      |      |      |      |
+ * |      |      |S-Btn2|S-Btn1|      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_MOUSE] = LAYOUT_preonic_grid(
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,      _______, 
   _______, _______, _______, SH_BTN2, SH_BTN1, _______, _______, _______, KC_MS_U, _______, KC_MS_ACCEL1, _______, 
   EXIT_MO, _______, HYP_F15, KC_BTN2, KC_BTN1, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_MS_ACCEL0, _______, 
-  _______, _______, SH_BTN2, SH_BTN1, OP_BTN1, _______, _______, _______, _______, _______, KC_MS_ACCEL2, _______, 
-  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ 
+  _______, _______, OP_BTN2, OP_BTN1, OP_BTN1, _______, _______, _______, _______, _______, KC_MS_ACCEL2, _______, 
+  _______, _______, SH_BTN2, SH_BTN1, _______, _______, _______, _______, _______, _______, _______, _______ 
 ),
 
 /* Functions
@@ -640,6 +665,58 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     }
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+// Tap dance functions
+//////////////////////////////////////////////////////////////////////////////////
+// Determine the tapdance state to return
+td_state_t cur_dance(qk_tap_dance_state_t *state) {
+    if (state->count == 1) {
+        if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
+        else return TD_SINGLE_HOLD;
+    }
+    else return TD_UNKNOWN; // Any number higher than the maximum state value you return above
+}
+
+// Handle the possible states for each tapdance keycode you define:
+void tb_util_finished(qk_tap_dance_state_t *state, void *user_data) {
+    td_state = cur_dance(state);
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            register_mods(KC_LALT);
+            register_mods(KC_LSFT);
+            register_mods(KC_LCTL);
+            register_code16(KC_F15);
+            break;
+        case TD_SINGLE_HOLD:
+            layer_on(_MOUSE);
+            break;
+        case TD_UNKNOWN:
+        case TD_NONE:
+            break;
+    }
+}
+
+void tb_util_reset(qk_tap_dance_state_t *state, void *user_data) {
+    switch (td_state) {
+        case TD_SINGLE_TAP:
+            unregister_code16(KC_F15);
+            unregister_mods(KC_LCTL);
+            unregister_mods(KC_LSFT);
+            unregister_mods(KC_LALT);
+            break;
+        case TD_SINGLE_HOLD:
+            layer_off(_MOUSE);
+            break;
+        case TD_UNKNOWN:
+        case TD_NONE:
+            break;
+    }
+}
+
+// Define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
+qk_tap_dance_action_t tap_dance_actions[] = {
+        [TB_UTIL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, tb_util_finished, tb_util_reset)
+};
 
 // bool led_update_user(led_t led_state) {
 //     #ifdef AUDIO_ENABLE

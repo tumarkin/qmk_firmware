@@ -78,7 +78,7 @@
 #define SPC_MV  LT(_MOVEMENT, KC_SPC)
 #define ESC_MO  LT(_MOUSE, KC_ESC)
 
-#define TB_UTIL LT(_MOUSE, HYP_F15)
+// #define TB_UTIL LT(_MOUSE, HYP_F15)
 // #define ESC_CAP TD(TD_ESC_CAPS)
 // #define TAB_10  LT(_TENKEY, KC_TAB)
 // #define TENK_MO   MO(_TENKEY)
