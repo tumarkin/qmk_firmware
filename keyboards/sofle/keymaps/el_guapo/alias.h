@@ -51,6 +51,11 @@
 #define MS_AC_0 KC_MS_ACCEL0
 #define MS_AC_1 KC_MS_ACCEL1
 #define MS_AC_2 KC_MS_ACCEL2
+#define HYP_F15 HYPR(KC_F15)
+#define SH_BTN1 S(KC_BTN1)
+#define SH_BTN2 S(KC_BTN2)
+#define OP_BTN1 G(KC_BTN1)
+#define OP_BTN2 G(KC_BTN2)
 
 // Custom key shortcuts
 // #define PROG_TG TG(_PROGRAMMER)
@@ -60,5 +65,19 @@
 #define SPC_MVR  LT(_MOVEMENT_R, KC_SPC)
 // #define ESC_MO  LT(_MOUSE, KC_ESC)
 
+
 #endif // alias_h_INCLUDED
+
+// Navigation
+#define KC_BACK G(KC_LBRC)
+#define KC_FWD  G(KC_RBRC)
+#define KC_PREV G(KC_LCBR)
+#define KC_NEXT G(KC_RCBR)
+
+// Buttons
+#define SH_BTN1 S(KC_BTN1)
+#define SH_BTN2 S(KC_BTN2)
+#define OP_BTN1 G(KC_BTN1)
+#define OP_BTN2 G(KC_BTN2)
+#define HYP_F15 HYPR(KC_F15)
 
