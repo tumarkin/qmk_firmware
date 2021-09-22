@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    QWRT_R, KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,      KC_QUOT, 
   ESC_MO,  QWRT_A,  QWRT_S,  QWRT_D,  QWRT_F, QWRT_G, KC_H,   QWRT_J, QWRT_K,  QWRT_L,  QWRT_SCLN, KC_ENT,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH,   KC_RSFT,
-  FUNCSHN, TD(TB_UTIL), KC_BTN2, KC_BTN1, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
+  FUNCSHN, TD_BALL, KC_BTN2, KC_BTN1, LOWER,  SPC_MV, SPC_MV, RAISE,  KC_LEFT, KC_DOWN, KC_UP,     KC_RGHT
 ),
 /* Dvorak
    ,-----------------------------------------------------------------------------------.
@@ -211,7 +211,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |      |   <  |   >  |      |      |   +  |   =  |  *   |      |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |   {  |   }  |   (  |   )  |      |      |   -  |   _  |  /   |  |   |      |
+ * |      |   {  |   }  |   (  |   )  |      |      |   -  |   _  |  \   |  |   |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      |   [  |   ]  |      |      |      |      |      |  \   |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -222,7 +222,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = LAYOUT_preonic_grid(
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   _______, _______, _______, KC_LT,   KC_GT,   _______, _______, KC_PLUS, KC_EQL,  KC_ASTR, _______, _______, 
-  _______, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, _______, _______, KC_MINS, KC_UNDS, KC_SLSH, KC_PIPE, _______, 
+  _______, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, _______, _______, KC_MINS, KC_UNDS, KC_BSLS, KC_PIPE, _______, 
   _______, _______, _______, KC_LBRC, KC_RBRC, _______, _______, _______, _______, _______, KC_BSLS, _______,
   _______, _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, _______, _______, _______, _______
 ),
@@ -267,14 +267,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______, KC_SLSH, KC_7,     KC_8,    KC_9,    KC_ASTR, _______, 
   _______, _______, _______, _______, _______, _______, KC_MINS, KC_4,     KC_5,    KC_6,    KC_PLUS, _______, 
   _______, _______, _______, _______, _______, _______, KC_EQL,  KC_1,     KC_2,    KC_3,    KC_DOT,  KC_TAB, 
-  _______, _______, _______, _______, _______, KC_0,     KC_0,   KC_0,     KC_0,    KC_DOT,  _______, _______ 
+  _______, _______, _______, _______, _______, KC_0,    KC_0,    KC_0,     KC_0,    KC_DOT,  _______, _______ 
 ),
 
 /* Mouse
  * ,-----------------------------------------------------------------------------------.
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |S-Btn2|S-Btn1|      |      |      |  Up  |      | Spd1 |      |
+ * |      |      |      |S-Btn2|S-Btn1|      |      | Btn1 |  Up  | Btn2 | Spd1 |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * | Exit |      |      | Btn2 | Btn1 |      |      | Left | Down | Right| Spd0 |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -285,7 +285,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_MOUSE] = LAYOUT_preonic_grid(
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,      _______, 
-  _______, _______, _______, SH_BTN2, SH_BTN1, _______, _______, _______, KC_MS_U, _______, KC_MS_ACCEL1, _______, 
+  _______, _______, _______, SH_BTN2, SH_BTN1, _______, _______, KC_BTN1, KC_MS_U, KC_BTN2, KC_MS_ACCEL1, _______, 
   EXIT_MO, _______, HYP_F15, KC_BTN2, KC_BTN1, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_MS_ACCEL0, _______, 
   _______, _______, OP_BTN2, OP_BTN1, OP_BTN1, _______, _______, _______, _______, _______, KC_MS_ACCEL2, _______, 
   _______, _______, SH_BTN2, SH_BTN1, _______, _______, _______, _______, _______, _______, _______, _______ 
@@ -585,7 +585,7 @@ enum combos {
     MOUSE_QWERTY,
     TENKEY_QWERTY,
     // C_EQUALS,
-    // C_BACKSLASH,
+    C_BACKSLASH,
     C_PIPE,
     C_EXPOSE,
 };
@@ -596,7 +596,7 @@ const uint16_t PROGMEM shifts_bekl_combo[]   = {KC_J, KC_SLSH, COMBO_END};
 const uint16_t PROGMEM mouse_qwerty_combo[]  = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM tenkey_querty_combo[] = {KC_Z, KC_C, COMBO_END};
 // const uint16_t PROGMEM equals_combo[]        = {KC_4, KC_PLUS, COMBO_END};
-// const uint16_t PROGMEM backslash_combo[]     = {KC_COMM, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM backslash_combo[]     = {KC_J, KC_SCLN, COMBO_END};
 const uint16_t PROGMEM pipe_combo[]          = {KC_COMM, KC_SLSH, COMBO_END};
 const uint16_t PROGMEM expose_combo[]        = {KC_BTN1, KC_BTN2, COMBO_END};
 
@@ -608,7 +608,7 @@ combo_t key_combos[COMBO_COUNT] = {
     // [SHIFTS_BEKL]   = COMBO_ACTION(shifts_bekl_combo),
     [TENKEY_QWERTY] = COMBO_ACTION(tenkey_querty_combo),
     // [C_EQUALS]      = COMBO(equals_combo, KC_EQL),
-    // [C_BACKSLASH]   = COMBO(backslash_combo, KC_BSLS),
+    [C_BACKSLASH]   = COMBO(backslash_combo, KC_BSLS),
     [C_PIPE]        = COMBO(pipe_combo, KC_PIPE),
     [C_EXPOSE]      = COMBO_ACTION(expose_combo),
 };
