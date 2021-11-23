@@ -593,7 +593,7 @@ enum combos {
 const uint16_t PROGMEM shifts_querty_combo[] = {KC_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM shifts_dvorak_combo[] = {KC_SCLN, KC_Q, COMBO_END};
 const uint16_t PROGMEM shifts_bekl_combo[]   = {KC_J, KC_SLSH, COMBO_END};
-const uint16_t PROGMEM mouse_qwerty_combo[]  = {KC_Q, KC_W, COMBO_END};
+// const uint16_t PROGMEM mouse_qwerty_combo[]  = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM tenkey_querty_combo[] = {KC_Z, KC_C, COMBO_END};
 // const uint16_t PROGMEM equals_combo[]        = {KC_4, KC_PLUS, COMBO_END};
 const uint16_t PROGMEM backslash_combo[]     = {KC_J, KC_SCLN, COMBO_END};
@@ -604,7 +604,7 @@ const uint16_t PROGMEM expose_combo[]        = {KC_BTN1, KC_BTN2, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     [SHIFTS_QWERTY] = COMBO_ACTION(shifts_querty_combo),
     [SHIFTS_DVORAK] = COMBO_ACTION(shifts_dvorak_combo),
-    [MOUSE_QWERTY]  = COMBO_ACTION(mouse_qwerty_combo),
+    // [MOUSE_QWERTY]  = COMBO_ACTION(mouse_qwerty_combo),
     // [SHIFTS_BEKL]   = COMBO_ACTION(shifts_bekl_combo),
     [TENKEY_QWERTY] = COMBO_ACTION(tenkey_querty_combo),
     // [C_EQUALS]      = COMBO(equals_combo, KC_EQL),
@@ -627,15 +627,15 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             }
         break;
 
-        case MOUSE_QWERTY:
-        if (pressed) {
-            #ifdef AUDIO_ENABLE
-              if (IS_LAYER_OFF(_MOUSE)) 
-                PLAY_SONG(tone_mouse_mode_on);
-            #endif //AUDIO_ENABLE
-           layer_invert(_MOUSE);
-        }
-        break;
+        // case MOUSE_QWERTY:
+        // if (pressed) {
+        //     #ifdef AUDIO_ENABLE
+        //       if (IS_LAYER_OFF(_MOUSE)) 
+        //         PLAY_SONG(tone_mouse_mode_on);
+        //     #endif //AUDIO_ENABLE
+        //    layer_invert(_MOUSE);
+        // }
+        // break;
 
         case TENKEY_QWERTY:
             if (pressed) {
