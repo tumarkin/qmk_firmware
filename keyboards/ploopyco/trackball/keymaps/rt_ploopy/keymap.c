@@ -28,12 +28,12 @@
 enum rt_keycodes {
     EXPOSE = PLOOPY_SAFE_RANGE,
     EXPOSE_APP,
-    BTN1_LK
+    // BTN1_LK
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT( /* Base */
-        KC_BTN1, MO(1),   BTN1_LK, EXPOSE,     KC_BTN2
+        KC_BTN1, MO(1),   KC_BTN2, EXPOSE,     KC_BTN2
     ),
     [1] = LAYOUT(
         _______, _______, _______, EXPOSE_APP, DRAG_SCROLL
@@ -61,12 +61,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
         break;
-      case BTN1_LK:
-        if (record->event.pressed) {
-          register_code(KC_BTN1);
-        }
-        return false;
-        break;
+      // case BTN1_LK:
+      //   if (record->event.pressed) {
+      //     register_code(KC_BTN1);
+      //   }
+      //   return false;
+      //   break;
     }
     return true;
 }
