@@ -20,31 +20,71 @@
 // #define PLOOPY_DPI_OPTIONS { 200, 1200, 1600, 2400 }
 // #define PLOOPY_DPI_DEFAULT 0
 #define OPT_SCALE 0.5
+#define PLOOPY_DRAGSCROLL_MULTIPLIER 5.2
 
 // safe range starts at `PLOOPY_SAFE_RANGE` instead.
  
 // bool expose_on = false; // init expose state
 
+// Aliases
+// - Browser
+# define BR_BACK  G(KC_LBRC)
+# define BR_FWD   G(KC_RBRC)
+# define BR_PREV  G(KC_LCBR)
+# define BR_NEXT  G(KC_RCBR)
+// - Scrolling
+# define DRAG_SC DRAG_SCROLL
+
+
 enum rt_keycodes {
     EXPOSE = PLOOPY_SAFE_RANGE,
     EXPOSE_APP,
+    LOWER,
+    RAISE,
     // BTN1_LK
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT( /* Base */
-        KC_BTN1, MO(1),   KC_BTN2, EXPOSE,     KC_BTN2
+        KC_BTN1, _______,   KC_BTN2, LOWER,  RAISE
     ),
     [1] = LAYOUT(
-        _______, _______, _______, EXPOSE_APP, DRAG_SCROLL
+        BR_BACK, DRAG_SC,   BR_FWD,  _______,    _______
+    ),
+    [2] = LAYOUT(
+        BR_PREV, _______,   BR_NEXT, _______, _______
+    ),
+    [3] = LAYOUT(
+        EXPOSE,  _______,   EXPOSE_APP, _______, _______
     ),
 };
 
 // DRAG_SCROLL
 
 
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+      case LOWER:
+        if (record->event.pressed) {
+          layer_on(1);
+          update_tri_layer(1, 2, 3);
+        } else {
+          layer_off(1);
+          update_tri_layer(1, 2, 3);
+        }
+        return false;
+        break;
+      case RAISE:
+        if (record->event.pressed) {
+          layer_on(2);
+          update_tri_layer(1, 2, 3);
+        } else {
+          layer_off(2);
+          update_tri_layer(1, 2, 3);
+        }
+        return false;
+        break;
       case EXPOSE:
         if (record->event.pressed) {
           register_code(KC_LCTL);
