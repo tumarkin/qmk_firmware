@@ -43,7 +43,7 @@
 #    define PLOOPY_DRAGSCROLL_DPI 100 // Fixed-DPI Drag Scroll
 #endif
 #ifndef PLOOPY_DRAGSCROLL_MULTIPLIER
-#    define PLOOPY_DRAGSCROLL_MULTIPLIER 0.75 // Variable-DPI Drag Scroll
+#    define PLOOPY_DRAGSCROLL_MULTIPLIER 0.25 // Variable-DPI Drag Scroll
 #endif
 
 keyboard_config_t keyboard_config;

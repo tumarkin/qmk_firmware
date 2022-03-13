@@ -81,3 +81,4 @@
 #define OP_BTN2 G(KC_BTN2)
 #define HYP_F15 HYPR(KC_F15)
 
+#define TD_BALL TD(TB_UTIL)

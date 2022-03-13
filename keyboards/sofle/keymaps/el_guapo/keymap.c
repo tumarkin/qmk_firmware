@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT, \
   KC_ESC,  QWRT_A,  QWRT_S,  QWRT_D,  QWRT_F,  KC_G,                      KC_H,    QWRT_J,  QWRT_K,  QWRT_L,  QWRT_SC, KC_ENT, \
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_MUTE, KC_MPLY, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
-                 TB_UTIL,  KC_BTN2, KC_BTN1, KC_LOWER, SPC_MVL,    SPC_MVR, KC_RAISE, XXXXXXX,XXXXXXX,XXXXXXX \
+                 TD_BALL,  KC_BTN2, KC_BTN1, KC_LOWER, SPC_MVL,    SPC_MVR, KC_RAISE, XXXXXXX,XXXXXXX,XXXXXXX \
 ),
 /*
  * DVORAK
@@ -168,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |   <  |   >  |      |                    |      |   +  |   =  |   *  |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |   {  |   }  |   (  |   )  |      |-------.    ,-------|      |   -  |   _  |   /  |   |  |      |
+ * |      |   {  |   }  |   (  |   )  |      |-------.    ,-------|      |   -  |   _  |   \  |   |  |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |   [  |   ]  |      |-------|    |-------|      |      |      |      |   \  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -179,7 +179,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = LAYOUT( \
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, 
   _______, _______, _______, KC_LT,   KC_GT,   _______,                   _______, KC_PLUS, KC_EQL,  KC_ASTR, _______, _______, 
-  _______, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, _______,                   _______, KC_MINS, KC_UNDS, KC_SLSH, KC_PIPE, _______,
+  _______, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, _______,                   _______, KC_MINS, KC_UNDS, KC_BSLS, KC_PIPE, _______,
   _______, _______, _______, KC_LBRC, KC_RBRC, _______, _______, _______, _______, _______, _______, _______, KC_BSLS, _______, 
                        _______, _______, _______, _______, KC_BSPC,       _______, _______, _______, _______, _______\
 ),
@@ -266,7 +266,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, SH_BTN2, SH_BTN1, _______,                   _______, _______, _______, _______, _______, _______, 
   EXIT_MS, _______, HYP_F15, KC_BTN2, KC_BTN1, _______,                   _______, _______, _______, _______, _______, _______, 
   _______, _______, _______, OP_BTN2, OP_BTN1, _______, _______, _______, _______, _______, _______, _______, _______, _______, 
-                 _______,  _______, _______, _______, _______,      _______, _______,  _______,_______,_______ \
+                 _______,  SH_BTN2, SH_BTN1, _______, _______,      _______, _______,  _______,_______,_______ \
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -589,9 +589,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (clockwise) {
-            tap_code(KC_PGDOWN);
-        } else {
             tap_code(KC_PGUP);
+        } else {
+            tap_code(KC_PGDOWN);
         }
     }
     return true;
@@ -700,3 +700,9 @@ void tb_util_reset(qk_tap_dance_state_t *state, void *user_data) {
             break;
     }
 }
+
+// Define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
+qk_tap_dance_action_t tap_dance_actions[] = {
+        [TB_UTIL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, tb_util_finished, tb_util_reset)
+};
+
