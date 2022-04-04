@@ -36,21 +36,6 @@
 #define DVRK_P LT(_TENKEY, KC_P)
 #define DVRK_I LT(_TENKEY, KC_I)
 
-// BEAKL
-// Left-hand home row mods
-#define BEKL_Y LCTL_T(KC_Y)
-#define BEKL_I LALT_T(KC_I)
-#define BEKL_E LGUI_T(KC_E)
-#define BEKL_A LSFT_T(KC_A)
-// Right-hand home row mods
-#define BEKL_S RSFT_T(KC_S)
-#define BEKL_T RGUI_T(KC_T)
-#define BEKL_N RALT_T(KC_N)
-#define BEKL_B RCTL_T(KC_B)
-// 10 key toggles
-#define BEKL_U LT(_TENKEY, KC_U)
-#define BEKLDT LT(_TENKEY, KC_DOT)
-
 // HANDS DOWN
 // Left-hand home row mods
 #define HNDS_R LCTL_T(KC_R)
@@ -77,10 +62,10 @@
 #define MOUS_MO MO(_MOUSE)
 #define SPC_LW  LT(_LOWER, KC_SPC)
 #define SPC_RS  LT(_RAISE, KC_SPC)
-#define BSPC_AD LT(_ADJUST, KC_BSPC)
-#define DEL_AD  LT(_ADJUST, KC_DEL)
+// #define BSPC_AD LT(_ADJUST, KC_BSPC)
+// #define DEL_AD  LT(_ADJUST, KC_DEL)
 #define ESC_MO  LT(_MOUSE, KC_ESC)
-#define GRV_AD  LT(_ADJUST, KC_GRV)
+// #define GRV_AD  LT(_ADJUST, KC_GRV)
 #define TAB_ADJ LT(_ADJUST, KC_TAB)
  
 #define TD_BALL TD(TB_UTIL)

@@ -60,10 +60,7 @@ enum preonic_keycodes {
   HANDDWN,
   PROG_ON,
   PROG_OFF,
-  LOWER,
-  RAISE,
   BACKLIT,
-  // TB_SCRL,
   EXIT_MO,
   KC_BTNL,
   KC_BTNR,
@@ -349,26 +346,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
           break;
-        case LOWER:
-          if (record->event.pressed) {
-            layer_on(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          } else {
-            layer_off(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          }
-          return false;
-          break;
-        case RAISE:
-          if (record->event.pressed) {
-            layer_on(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          } else {
-            layer_off(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-          }
-          return false;
-          break;
         case BACKLIT:
           if (record->event.pressed) {
             register_code(KC_RSFT);
@@ -438,23 +415,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
           break;
-        // case KC_CAPS:
-        //   #ifdef AUDIO_ENABLE
-        //     PLAY_SONG(tone_caps_lock);
-        //   #endif
-        //   return true;
-        //   break;
-        // case TB_SCRL:
-        //   if (record->event.pressed) {
-        //     led_t led_usb_state = host_keyboard_led_state();
-        //     if (!led_usb_state.caps_lock) {
-        //       register_code(KC_CAPS);
-        //     }
-        //   } else {
-        //       register_code(KC_CAPS);
-        //   }
-        //   return false;
-        //   break;
         case EXIT_MO:
           if (record->event.pressed) {
             register_mods(mod_config(MOD_LCTL));
@@ -470,112 +430,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
-// bool muse_mode = false;
-// uint8_t last_muse_note = 0;
-// uint16_t muse_counter = 0;
-// uint8_t muse_offset = 70;
-// uint16_t muse_tempo = 50;
-
-// void encoder_update_user(uint8_t index, bool clockwise) {
-//   if (muse_mode) {
-//     if (IS_LAYER_ON(_RAISE)) {
-//       if (clockwise) {
-//         muse_offset++;
-//       } else {
-//         muse_offset--;
-//       }
-//     } else {
-//       if (clockwise) {
-//         muse_tempo+=1;
-//       } else {
-//         muse_tempo-=1;
-//       }
-//     }
-//   } else {
-//     if (clockwise) {
-//       register_code(KC_PGDN);
-//       unregister_code(KC_PGDN);
-//     } else {
-//       register_code(KC_PGUP);
-//       unregister_code(KC_PGUP);
-//     }
-//   }
-// }
-
-// void dip_switch_update_user(uint8_t index, bool active) {
-//     switch (index) {
-//         case 0:
-//             if (active) {
-//                 layer_on(_ADJUST);
-//             } else {
-//                 layer_off(_ADJUST);
-//             }
-//             break;
-//         case 1:
-//             if (active) {
-//                 muse_mode = true;
-//             } else {
-//                 muse_mode = false;
-//             }
-//     }
-// }
-
-
-// void matrix_scan_user(void) {
-// #ifdef AUDIO_ENABLE
-//     if (muse_mode) {
-//         if (muse_counter == 0) {
-//             uint8_t muse_note = muse_offset + SCALE[muse_clock_pulse()];
-//             if (muse_note != last_muse_note) {
-//                 stop_note(compute_freq_for_midi_note(last_muse_note));
-//                 play_note(compute_freq_for_midi_note(muse_note), 0xF);
-//                 last_muse_note = muse_note;
-//             }
-//         }
-//         muse_counter = (muse_counter + 1) % muse_tempo;
-//     } else {
-//         if (muse_counter) {
-//             stop_all_notes();
-//             muse_counter = 0;
-//         }
-//     }
-// #endif
-// }
-
-
-
-// bool music_mask_user(uint16_t keycode) {
-//   switch (keycode) {
-//     case RAISE:
-//     case LOWER:
-//       return false;
-//     default:
-//       return true;
-//   }
-// }
-
 ////////////////////////////////////////////////////////////////////////////////
 // Combos
 ////////////////////////////////////////////////////////////////////////////////
 enum combos {
     SHIFTS_QWERTY,
     SHIFTS_DVORAK,
-    // SHIFTS_BEKL,
-    MOUSE_QWERTY,
     TENKEY_QWERTY,
-    // C_EQUALS,
-    C_BACKSLASH,
     C_PIPE,
     C_EXPOSE,
 };
 
+
+
 const uint16_t PROGMEM shifts_querty_combo[] = {KC_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM shifts_dvorak_combo[] = {KC_SCLN, KC_Q, COMBO_END};
-const uint16_t PROGMEM shifts_bekl_combo[]   = {KC_J, KC_SLSH, COMBO_END};
-// const uint16_t PROGMEM mouse_qwerty_combo[]  = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM tenkey_querty_combo[] = {KC_Z, KC_C, COMBO_END};
-// const uint16_t PROGMEM equals_combo[]        = {KC_4, KC_PLUS, COMBO_END};
-const uint16_t PROGMEM backslash_combo[]     = {KC_J, KC_SCLN, COMBO_END};
 const uint16_t PROGMEM pipe_combo[]          = {KC_COMM, KC_SLSH, COMBO_END};
 const uint16_t PROGMEM expose_combo[]        = {KC_BTN1, KC_BTN2, COMBO_END};
 
@@ -583,11 +453,7 @@ const uint16_t PROGMEM expose_combo[]        = {KC_BTN1, KC_BTN2, COMBO_END};
 combo_t key_combos[COMBO_COUNT] = {
     [SHIFTS_QWERTY] = COMBO_ACTION(shifts_querty_combo),
     [SHIFTS_DVORAK] = COMBO_ACTION(shifts_dvorak_combo),
-    // [MOUSE_QWERTY]  = COMBO_ACTION(mouse_qwerty_combo),
-    // [SHIFTS_BEKL]   = COMBO_ACTION(shifts_bekl_combo),
     [TENKEY_QWERTY] = COMBO_ACTION(tenkey_querty_combo),
-    // [C_EQUALS]      = COMBO(equals_combo, KC_EQL),
-    [C_BACKSLASH]   = COMBO(backslash_combo, KC_BSLS),
     [C_PIPE]        = COMBO(pipe_combo, KC_PIPE),
     [C_EXPOSE]      = COMBO_ACTION(expose_combo),
 };
@@ -596,7 +462,6 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     switch(combo_index) {
         case SHIFTS_QWERTY:
         case SHIFTS_DVORAK:
-        // case SHIFTS_BEKL:
         if (pressed) {
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_caps_lock);
@@ -605,16 +470,6 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
             // SEND_STRING(SS_TAP(KC_CAP));
             }
         break;
-
-        // case MOUSE_QWERTY:
-        // if (pressed) {
-        //     #ifdef AUDIO_ENABLE
-        //       if (IS_LAYER_OFF(_MOUSE)) 
-        //         PLAY_SONG(tone_mouse_mode_on);
-        //     #endif //AUDIO_ENABLE
-        //    layer_invert(_MOUSE);
-        // }
-        // break;
 
         case TENKEY_QWERTY:
             if (pressed) {
