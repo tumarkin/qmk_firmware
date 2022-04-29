@@ -20,7 +20,14 @@
 // #define PLOOPY_DPI_OPTIONS { 200, 1200, 1600, 2400 }
 // #define PLOOPY_DPI_DEFAULT 0
 #define OPT_SCALE 0.5
-#define PLOOPY_DRAGSCROLL_MULTIPLIER 5.2
+// #define PLOOPY_DRAGSCROLL_MULTIPLIER 0.25
+// #define PLOOPY_DRAGSCROLL_DPI 1000
+// #define PLOOPY_DRAGSCROLL_FIXED
+
+#define PLOOPY_DRAGSCROLL_FIXED 1
+#define PLOOPY_DRAGSCROLL_DPI 100
+#define PLOOPY_DPI_DEFAULT 0
+#define PLOOPY_DRAGSCROLL_MOMENTARY 1
 
 // safe range starts at `PLOOPY_SAFE_RANGE` instead.
  
@@ -73,6 +80,8 @@ td_state_t cur_dance(qk_tap_dance_state_t *state);
 void expose_finished(qk_tap_dance_state_t *state, void *user_data);
 void expose_reset(qk_tap_dance_state_t *state, void *user_data);
 
+// extern uint16_t dpi_array[];
+
     
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -80,17 +89,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_BTN1, _______,   KC_BTN2, TD(EXPS_LR),  TD(EXAP_LR)
     ),
     [1] = LAYOUT(
-        BR_BACK, DRAG_SC,   BR_FWD,  _______,    _______
+        BR_BACK, _______,   BR_FWD,  _______,    _______
     ),
     [2] = LAYOUT(
         BR_PREV, _______,   BR_NEXT, _______, _______
     ),
     [3] = LAYOUT(
-        _______,  _______,  _______, _______, _______
+        DRAG_SC,  _______,  _______, _______, _______
     ),
 };
 
-// DRAG_SCROLL
+// // DRAG_SCROLL
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     switch (keycode) {
+//         case DRAG_SCROLL:
+//             if (record->event.pressed) {
+//                 // this toggles the state each time you tap it
+//                 is_drag_scroll ^= 1;
+//                 pmw_set_cpi(dpi_array[keyboard_config.dpi_config] * (is_drag_scroll ? 0.1 : 1));
+//             }
+//             break;
+//         }
+//     return true;
+// }
+
 
 
 

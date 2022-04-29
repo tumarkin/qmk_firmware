@@ -18,6 +18,12 @@
 
 #include "trackball.h"
 
+// Added from https://www.reddit.com/r/ploopy/comments/ootww2/slower_drag_scroll/
+#define PLOOPY_DRAGSCROLL_FIXED 1
+#define PLOOPY_DRAGSCROLL_DPI 100
+#define PLOOPY_DPI_DEFAULT 0
+// #define PLOOPY_DRAGSCROLL_MOMENTARY 1
+
 #ifndef OPT_DEBOUNCE
 #    define OPT_DEBOUNCE 5  // (ms) 			Time between scroll events
 #endif
@@ -254,16 +260,36 @@ void pointing_device_task(void) {
     process_mouse(&mouse_report);
 
     if (is_drag_scroll) {
-        mouse_report.h = mouse_report.x;
-#ifdef PLOOPY_DRAGSCROLL_INVERT
-        // Invert vertical scroll direction
-        mouse_report.v = -mouse_report.y;
-#else
-        mouse_report.v = mouse_report.y;
-#endif
-        mouse_report.x = 0;
-        mouse_report.y = 0;
+        if (drag_scroll_cnt++ % 8 == 0) {
+            mouse_report.h = mouse_report.x;
+            #ifdef PLOOPY_DRAGSCROLL_INVERT
+            // Invert vertical scroll direction
+            mouse_report.v = -mouse_report.y;
+            #else
+            mouse_report.v = mouse_report.y;
+            #endif
+            xprintf("SC: x:%d, y: %d, v: %d, h: %d\n", mouse_report.x, mouse_report.y, mouse_report.v, mouse_report.h);
+            mouse_report.x = 0;
+            mouse_report.y = 0;
+        } else {
+            mouse_report.x = 0;
+            mouse_report.y = 0;
+            }
+        } else {
+            drag_scroll_cnt = 0;
     }
+                
+//     if (is_drag_scroll) {
+//         mouse_report.h = mouse_report.x;
+// #ifdef PLOOPY_DRAGSCROLL_INVERT
+//         // Invert vertical scroll direction
+//         mouse_report.v = -mouse_report.y;
+// #else
+//         mouse_report.v = mouse_report.y;
+// #endif
+//         mouse_report.x = 0;
+//         mouse_report.y = 0;
+//     }
 
     pointing_device_set_report(mouse_report);
     pointing_device_send();
