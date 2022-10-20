@@ -17,22 +17,10 @@
  */
 #include QMK_KEYBOARD_H
 
-// #define PLOOPY_DPI_OPTIONS { 200, 1200, 1600, 2400 }
-// #define PLOOPY_DPI_DEFAULT 0
 #define OPT_SCALE 0.5
-// #define PLOOPY_DRAGSCROLL_MULTIPLIER 0.25
-// #define PLOOPY_DRAGSCROLL_DPI 1000
-// #define PLOOPY_DRAGSCROLL_FIXED
-
-#define PLOOPY_DRAGSCROLL_FIXED 1
-#define PLOOPY_DRAGSCROLL_DPI 100
-#define PLOOPY_DPI_DEFAULT 0
-#define PLOOPY_DRAGSCROLL_MOMENTARY 1
 
 // safe range starts at `PLOOPY_SAFE_RANGE` instead.
  
-// bool expose_on = false; // init expose state
-
 // Aliases
 // - Browser
 # define BR_BACK  G(KC_LBRC)
@@ -118,42 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //     switch (keycode) {
-      // case LOWER:
-      //   if (record->event.pressed) {
-      //     layer_on(1);
-      //     update_tri_layer(1, 2, 3);
-      //   } else {
-      //     layer_off(1);
-      //     update_tri_layer(1, 2, 3);
-      //   }
-      //   return false;
-      //   break;
-      // case RAISE:
-      //   if (record->event.pressed) {
-      //     layer_on(2);
-      //     update_tri_layer(1, 2, 3);
-      //   } else {
-      //     layer_off(2);
-      //     update_tri_layer(1, 2, 3);
-      //   }
-      //   return false;
-      //   break;
-      // case EXPOSE:
-      //   if (record->event.pressed) {
-      //     register_code(KC_LCTL);
-      //     tap_code_delay(KC_UP, 100);
-      //     unregister_code(KC_LCTL);
-      //   }
-      //   return false;
-      //   break;
-      // case EXPOSE_APP:
-      //   if (record->event.pressed) {
-      //     register_code(KC_LCTL);
-      //     tap_code_delay(KC_DOWN, 100);
-      //     unregister_code(KC_LCTL);
-      //   }
-      //   return false;
-      //   break;
+
       // case BTN1_LK:
       //   if (record->event.pressed) {
       //     register_code(KC_BTN1);
