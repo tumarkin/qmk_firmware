@@ -208,19 +208,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |   `  |   !  |   @  |  #   |  $   |  %   |  ^   |  &   |  *   |  +   |  =   |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |   {  |   }  |   (  |   )  |      |      |   -  |   _  |  \   |  |   |      |
+ * |      |   <  |   >  |   (  |   )  |      |      |   -  |   _  |  \   |  =   |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |   <  |   >  |   [  |   ]  |      |      |      |      |      |  \   |      |
+ * |      |   {  |   }  |   [  |   ]  |      |      |   {  |   }  |      |  |   |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |     Bksp    |             |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
+
  
 [_RAISE] = LAYOUT_preonic_grid(
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
   KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_PLUS, KC_EQL,  _______,
-  _______, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, _______, _______, KC_MINS, KC_UNDS, KC_BSLS, KC_PIPE, _______, 
-  _______, KC_LT,   KC_GT,   KC_LBRC, KC_RBRC, _______, _______, _______, _______, _______, KC_BSLS, _______,
+  _______, KC_LT,   KC_GT,   KC_LPRN, KC_RPRN, _______, _______, KC_MINS, KC_UNDS, KC_BSLS, KC_EQL,  _______, 
+  _______, KC_LCBR, KC_RCBR, KC_LBRC, KC_RBRC, _______, _______, KC_LCBR, KC_RCBR, _______, KC_PIPE, _______,
   _______, _______, _______, _______, KC_BSPC, KC_BSPC, _______, _______, _______, _______, _______, _______
   // _______, _______, _______, _______, BSPC_AD, BSPC_AD, _______, _______, _______, _______, _______, _______
 ),
@@ -293,7 +294,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | Reset| Debug|      |      |      |      |TermOf|TermOn|      |      |      |  
+ * |      |      | Debug|      |      |      |      |TermOf|TermOn|      |      |Reset |  
  * |------+------+------+------+------+-------------+------+------+------+------+------|
  * |      |      |Aud cy|Aud on|AudOff|AGnorm|AGswap|Qwerty|Dvorak| Hands|      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -304,7 +305,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_preonic_grid(
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F11,  KC_F12,
-  _______, RESET,   DEBUG,   KC_LSCR, KC_SLCK, _______, _______, TERM_ON, TERM_OFF, _______, _______, _______,
+  _______, _______,   DEBUG,   KC_LSCR, KC_SLCK, _______, _______, TERM_ON, TERM_OFF, _______, _______, RESET,
   _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  DVORAK,   HANDDWN, _______, _______,
   _______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  PROG_ON, PROG_OFF, _______, BACKLIT, _______,
   _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______
@@ -436,32 +437,42 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 enum combos {
     SHIFTS_QWERTY,
     SHIFTS_DVORAK,
+    SHIFTS_HANDS,
     TENKEY_QWERTY,
     C_PIPE,
     C_EXPOSE,
+    C_CURLY_L,
+    C_CURLY_R,
 };
 
 
 
 const uint16_t PROGMEM shifts_querty_combo[] = {KC_Z, KC_X, COMBO_END};
 const uint16_t PROGMEM shifts_dvorak_combo[] = {KC_SCLN, KC_Q, COMBO_END};
+const uint16_t PROGMEM shifts_hands_combo[]  = {KC_X, KC_M, COMBO_END};
 const uint16_t PROGMEM tenkey_querty_combo[] = {KC_Z, KC_C, COMBO_END};
 const uint16_t PROGMEM pipe_combo[]          = {KC_COMM, KC_SLSH, COMBO_END};
 const uint16_t PROGMEM expose_combo[]        = {KC_BTN1, KC_BTN2, COMBO_END};
+const uint16_t PROGMEM left_curly_combo[]    = {KC_LT, KC_LPRN, COMBO_END};
+const uint16_t PROGMEM right_curly_combo[]   = {KC_GT, KC_RPRN, COMBO_END};
 
 
 combo_t key_combos[COMBO_COUNT] = {
     [SHIFTS_QWERTY] = COMBO_ACTION(shifts_querty_combo),
     [SHIFTS_DVORAK] = COMBO_ACTION(shifts_dvorak_combo),
+    [SHIFTS_HANDS]  = COMBO_ACTION(shifts_hands_combo),
     [TENKEY_QWERTY] = COMBO_ACTION(tenkey_querty_combo),
     [C_PIPE]        = COMBO(pipe_combo, KC_PIPE),
     [C_EXPOSE]      = COMBO_ACTION(expose_combo),
+    [C_CURLY_L]     = COMBO(left_curly_combo, KC_LCBR),
+    [C_CURLY_R]     = COMBO(right_curly_combo, KC_RCBR),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
     switch(combo_index) {
         case SHIFTS_QWERTY:
         case SHIFTS_DVORAK:
+        case SHIFTS_HANDS:
         if (pressed) {
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(tone_caps_lock);
