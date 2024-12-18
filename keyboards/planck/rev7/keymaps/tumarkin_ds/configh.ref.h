@@ -1,28 +1,23 @@
-/* Copyright 2015-2023 Jack Humbert
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 #pragma once
 
-#ifdef AUDIO_ENABLE
-#    define STARTUP_SONG SONG(PLANCK_SOUND)
-// #define STARTUP_SONG SONG(NO_SOUND)
+// The produce name needs to be redefined to work with setleds.
+// This statement will cause a conflict with the master config.h
+// should that file change. Simply update the master config.h
+// to make this work.
+#define PRODUCT         Preonic Keyboard
 
-#    define DEFAULT_LAYER_SONGS \
-        { SONG(QWERTY_SOUND), SONG(COLEMAK_SOUND), SONG(DVORAK_SOUND) }
+#ifdef AUDIO_ENABLE
+    #define STARTUP_SONG SONG(ZELDA_PUZZLE)
+    // #define STARTUP_SONG SONG(PREONIC_SOUND)
+    // #define STARTUP_SONG SONG(NO_SOUND)
+
+    // #define DEFAULT_LAYER_SONGS { SONG(QWERTY_SOUND), 
+    //                               SONG(COLEMAK_SOUND), 
+    //                               SONG(DVORAK_SOUND) 
+    //                             }
 #endif
+
+#define MUSIC_MASK (keycode != KC_NO)
 
 /*
  * MIDI options
@@ -40,15 +35,10 @@
    - Virtual sustain, portamento, and modulation wheel
    - etc.
 */
-// #define MIDI_ADVANCED
+//#define MIDI_ADVANCED
 
-/*
- * Encoder options
- */
-// #define PLANCK_ENCODER_SETTLE_PIN_STATE_DELAY 20
-// #define ENCODER_MAP_KEY_DELAY 10
-// #define ENCODER_RESOLUTION 4
-
+/* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
+//#define MIDI_TONE_KEYCODE_OCTAVES 2
 
 // Mod-tap settings
 // From: https://precondition.github.io/home-row-mods
@@ -56,7 +46,7 @@
 #define TAPPING_TERM 200
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
-// #define IGNORE_MOD_TAP_INTERRUPT
+#define IGNORE_MOD_TAP_INTERRUPT
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 // #define TAPPING_FORCE_HOLD
