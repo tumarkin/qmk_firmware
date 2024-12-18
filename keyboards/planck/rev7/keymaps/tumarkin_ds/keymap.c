@@ -16,6 +16,25 @@
 
 #include QMK_KEYBOARD_H
 #include "alias.h"
+#ifdef AUDIO_ENABLE
+    #include "my_songs.h"
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+// Audio stuff
+////////////////////////////////////////////////////////////////////////////////
+float tone_qwerty[][2]             = SONG(QWERTY_SOUND);
+float tone_dvorak[][2]             = SONG(DVORAK_SOUND);
+float tone_beakl[][2]              = SONG(ZELDA_TREASURE);
+float tone_prog_on[][2]            = SONG(MARIO_MUSHROOM);
+float tone_prog_off[][2]           = SONG(CLOSE_ENCOUNTERS_5_NOTE);
+float tone_caps_lock[][2]          = SONG(COIN_SOUND);
+float tone_tenkey_activate[][2]    = SONG(GUITAR_SOUND);
+float tone_tenkey_deactivate[][2]  = SONG(GUITAR_SOUND_DOWN);
+float tone_mouse_mode_on[][2]      = SONG(TERMINAL_SOUND);
+
+
+uint8_t mouse_state = 0;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Layers
@@ -364,6 +383,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 #endif
     switch (keycode) {
+        case QWERTY:
+          if (record->event.pressed) {
+            // set_single_persistent_default_layer(_QWERTY);
+            // default_layer_set(_QWERTY);
+            layer_off(_DVORAK);
+            layer_off(_HANDSDOWN);
+            #ifdef AUDIO_ENABLE
+                PLAY_SONG(tone_qwerty);
+            #endif //AUDIO_ENABLE
+          }
+          return false;
+          break;
+        case DVORAK:
+          if (record->event.pressed) {
+            layer_on(_DVORAK);
+            layer_off(_HANDSDOWN);
+            #ifdef AUDIO_ENABLE
+                PLAY_SONG(tone_dvorak);
+            #endif //AUDIO_ENABLE
+          }
+          return false;
+          break;
+        case HANDDWN:
+          if (record->event.pressed) {
+            layer_off(_DVORAK);
+            layer_on(_HANDSDOWN);
+            #ifdef AUDIO_ENABLE
+                PLAY_SONG(tone_beakl);
+            #endif //AUDIO_ENABLE
+          }
+          return false;
+          break;
         case BACKLIT:
             if (record->event.pressed) {
                 register_code(KC_RSFT);
@@ -400,6 +451,55 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
             break;
+        case KC_BTNL:
+          if (record->event.pressed) {
+              if (IS_LAYER_OFF(_MOUSE)) {
+                register_code(KC_BTN1);
+              } else {
+                register_mods(mod_config(MOD_LSFT));
+                register_code(KC_BTN1);
+              }
+          } else {
+              if (IS_LAYER_OFF(_MOUSE)) {
+                unregister_code(KC_BTN1);
+
+              } else {
+                unregister_code(KC_BTN1);
+                unregister_mods(mod_config(MOD_LSFT));
+              }
+          }
+          return false;
+          break;
+        case KC_BTNR:
+          if (record->event.pressed) {
+              if (IS_LAYER_OFF(_MOUSE)) {
+                register_code(KC_BTN2);
+              } else {
+                register_mods(mod_config(MOD_LSFT));
+                register_code(KC_BTN2);
+              }
+          } else {
+              if (IS_LAYER_OFF(_MOUSE)) {
+                unregister_code(KC_BTN2);
+
+              } else {
+                unregister_code(KC_BTN2);
+                unregister_mods(mod_config(MOD_LSFT));
+              }
+          }
+          return false;
+          break;
+        case EXIT_MO:
+          if (record->event.pressed) {
+            register_mods(mod_config(MOD_LCTL));
+            register_code(KC_F15);
+            layer_off(_MOUSE);
+          } else {
+            unregister_mods(mod_config(MOD_LCTL));
+            unregister_code(KC_F15);
+          }
+          return false;
+          break;
     }
     return true;
 }
@@ -524,9 +624,9 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         case SHIFTS_DVORAK:
         case SHIFTS_HANDS:
         if (pressed) {
-            // #ifdef AUDIO_ENABLE
-            //     PLAY_SONG(tone_caps_lock);
-            // #endif //AUDIO_ENABLE
+            #ifdef AUDIO_ENABLE
+                PLAY_SONG(tone_caps_lock);
+            #endif //AUDIO_ENABLE
             tap_code_delay(KC_CAPS,100);
             }
         break;
@@ -534,12 +634,12 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         case TENKEY_QWERTY:
             if (pressed) {
                 layer_invert(_TENKEY);
-                // #ifdef AUDIO_ENABLE
-                //     if (IS_LAYER_ON(_TENKEY))
-                //         PLAY_SONG(tone_tenkey_activate);
-                //     else
-                //         PLAY_SONG(tone_tenkey_deactivate);
-                // #endif //AUDIO_ENABLE
+                #ifdef AUDIO_ENABLE
+                    if (IS_LAYER_ON(_TENKEY))
+                        PLAY_SONG(tone_tenkey_activate);
+                    else
+                        PLAY_SONG(tone_tenkey_deactivate);
+                #endif //AUDIO_ENABLE
             }
         break;
 
